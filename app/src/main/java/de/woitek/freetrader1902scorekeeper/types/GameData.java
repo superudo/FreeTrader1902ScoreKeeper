@@ -138,11 +138,6 @@ public class GameData {
 		return sum;
 	}
 
-	/*
-		protected int getPossibleCargoAmount() {
-			return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
-		}
-	*/
 	private void notifyListeners(Object object, String property, int oldValue, int newValue) {
 		for (PropertyChangeListener name : listener) {
 			name.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
@@ -267,6 +262,11 @@ public class GameData {
 	public boolean mayMove() {
 		return (getMoney() > 0);
 	}
+
+	public int getFreeCargoAmount() {
+		return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
+	}
+
 /*
     public void SaveState(Bundle outState) {
 		outState.putInt(MONTH, getMonth());
