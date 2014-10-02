@@ -3,6 +3,7 @@ package de.woitek.freetrader1902scorekeeper;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
@@ -32,7 +33,7 @@ public class EventActivity extends Activity {
             b.setDisplayUseLogoEnabled(false);
             b.setDisplayHomeAsUpEnabled(true);
         }
-        gameData = GameData.CreateFromPreferences(getPreferences(MODE_PRIVATE));
+        gameData = GameData.CreateFromPreferences(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
         switcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
 

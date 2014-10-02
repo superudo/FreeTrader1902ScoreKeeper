@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +45,7 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        gameData = GameData.CreateFromPreferences(getPreferences(MODE_PRIVATE));
+        gameData = GameData.CreateFromPreferences(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
 		setContentView(R.layout.activity_main);
 
