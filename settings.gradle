@@ -1,1 +1,1 @@
-include ':app', ':styledradiogroup'
+include ':app', ':styledradiogroup', ':flexfonttextview'

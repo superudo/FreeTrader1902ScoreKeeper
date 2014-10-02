@@ -10,7 +10,7 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/tCargoTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:textSize="40sp"
         cust:fontFaceName="@string/western_font_name"/>
 
-    <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_marginTop="5dp"
         cust:display="Buy;Sell;Drop"/>
 
-    <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_marginTop="5dp"
         cust:display="1;2;3;4;5"/>
 
-    <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

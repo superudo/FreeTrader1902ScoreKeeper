@@ -1,12 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
 	compileSdkVersion 20
 	buildToolsVersion "20.0.0"
 
 	defaultConfig {
-		applicationId "de.woitek.freetrader1902scorekeeper"
-		minSdkVersion 17
+		applicationId "de.woitek.libraries.flexiblefonttextview"
+		minSdkVersion 8
 		targetSdkVersion 20
 		versionCode 1
 		versionName "1.0"
@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-	compile fileTree(include: ['*.jar'], dir: 'libs')
-	compile project(':styledradiogroup')
-	compile project(':flexfonttextview')
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	compile 'com.android.support:appcompat-v7:20.0.0'
 }

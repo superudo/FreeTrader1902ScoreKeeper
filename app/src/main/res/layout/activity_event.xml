@@ -19,7 +19,7 @@
         cust:display="Bandits;Bear;Police"
     />
 
-    <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:textSize="20dp"
                 cust:fontFaceName="@string/western_font_name"/>
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
             android:layout_height="fill_parent"
             android:layout_marginTop="10dp">
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:textSize="20dp"
                 cust:fontFaceName="@string/western_font_name"/>
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 android:textSize="@dimen/western_font_height"
                 cust:fontFaceName="@string/western_font_name"/>
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal">
 
-            <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
+            <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
                 android:id="@+id/textView12"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
