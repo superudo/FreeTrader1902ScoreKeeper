@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,7 +24,7 @@ import de.woitek.freetrader1902scorekeeper.views.BoxUIView;
 public class MainActivity extends Activity
 		implements PropertyChangeListener, View.OnClickListener {
 
-	private GameData gameData = new GameData();
+    private GameData gameData;
 
 	private TextView vGold;
 
@@ -39,16 +40,11 @@ public class MainActivity extends Activity
 
 	private BoxUIView bMonth;
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		gameData.SaveState(outState);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		gameData.RestoreState(savedInstanceState);
+        gameData = GameData.CreateFromPreferences(getPreferences(MODE_PRIVATE));
 
 		setContentView(R.layout.activity_main);
 
@@ -204,10 +200,10 @@ public class MainActivity extends Activity
 		}
 	}
 
-	@Override
-	public void onClick(View view) {
-		if (!gameData.gameFinished()) {
-			switch (view.getId()) {
+    @Override
+    public void onClick(View view) {
+        if (!gameData.gameFinished()) {
+            switch (view.getId()) {
 				case R.id.rowProduce:
 					new CargoDialog(this, gameData, GameData.PRODUCE).show();
 					break;
@@ -239,10 +235,13 @@ public class MainActivity extends Activity
 					MoveToNextCity();
 					break;
 				case R.id.tEvent:
-					startActivity(new Intent(this, EventActivity.class));
-					break;
-				default:
-					break;
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    gameData.SaveState(prefs);
+                    Intent eventIntent = new Intent(this, EventActivity.class);
+                    startActivity(eventIntent);
+                    break;
+                default:
+                    break;
 			}
 		}
 	}

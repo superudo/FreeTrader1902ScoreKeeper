@@ -1,6 +1,6 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
-import android.os.Bundle;
+import android.content.SharedPreferences;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -38,6 +38,12 @@ public class GameData {
 		InitGameData();
 		listener = new ArrayList<PropertyChangeListener>();
 	}
+
+    public static GameData CreateFromPreferences(SharedPreferences prefs) {
+        GameData data = new GameData();
+        data.RestoreState(prefs);
+        return data;
+    }
 
 	public void InitGameData() {
 		if (equipment == null) {
@@ -269,29 +275,34 @@ public class GameData {
 		return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
 	}
 
-    public void SaveState(Bundle outState) {
-	    if (outState != null) {
-		    outState.putInt(MONTH, getMonth());
-		    outState.putInt(MONEY, getMoney());
-		    for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
-			    outState.putInt(s, getEquipment(s));
-		    }
-		    for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-			    outState.putInt(s, getCargo(s));
-		    }
-	    }
-	}
+    public void SaveState(SharedPreferences prefs) {
+        if (prefs != null) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(MONTH, getMonth());
+            editor.putInt(MONEY, getMoney());
+            for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+                editor.putInt(s, getEquipment(s));
+            }
+            for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+                editor.putInt(s, getCargo(s));
+            }
+            editor.commit();
+        }
+    }
 
-	public void RestoreState(Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			month.setValue(savedInstanceState.getInt(MONTH));
-			setMoney(savedInstanceState.getInt(MONEY));
-			for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
-				setEquipment(s, savedInstanceState.getInt(s));
-			}
-			for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-				setCargo(s, savedInstanceState.getInt(s));
-			}
-		}
-	}
+    public void RestoreState(SharedPreferences prefs) {
+        if (prefs != null) {
+            month.setValue(prefs.getInt(MONTH, 1));
+            setMoney(prefs.getInt(MONEY, 5));
+            for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+                setEquipment(s, prefs.getInt(s, 3));
+            }
+            for (String s : new String[]{SHOTGUNS, ARMOR}) {
+                setEquipment(s, prefs.getInt(s, 2));
+            }
+            for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+                setCargo(s, prefs.getInt(s, 0));
+            }
+        }
+    }
 }
