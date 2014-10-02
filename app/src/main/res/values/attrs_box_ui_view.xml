@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoxUIView">
+        <attr name="boxColor" format="color"/>
+        <attr name="triStateBoxes" format="boolean"/>
+        <attr name="brightBoxes" format="boolean"/>
+        <attr name="numberOfBoxes" format="integer"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape>
+            <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="@dimen/button_radius" android:topLeftRadius="0dp" android:topRightRadius="@dimen/button_radius"/>
+            <solid android:color="@color/radio_button_blue"/>
+            <padding android:bottom="@dimen/button_padding" android:left="@dimen/radio_button_horizontal_padding" android:right="@dimen/radio_button_horizontal_padding" android:top="@dimen/button_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="@dimen/button_radius" android:topLeftRadius="0dp" android:topRightRadius="@dimen/button_radius"/>
+            <solid android:color="@color/radio_button_blue_transparent"/>
+            <stroke android:width="2dp" android:color="@color/blue"/>
+            <padding android:bottom="@dimen/button_padding" android:left="@dimen/radio_button_horizontal_padding" android:right="@dimen/radio_button_horizontal_padding" android:top="@dimen/button_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <layer-list>
+            <item>
+                <shape>
+                    <corners android:bottomRightRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+                    <solid android:color="@color/radio_button_blue"/>
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="0dp" android:right="2dp" android:top="2dp">
+                <shape>
+                    <corners android:bottomRightRadius="@dimen/button_inner_radius" android:topRightRadius="@dimen/button_inner_radius"/>
+                    <solid android:color="@color/radio_button_light_gray"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <corners android:bottomRightRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+                    <solid android:color="@color/radio_button_blue"/>
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="0dp" android:right="2dp" android:top="2dp">
+                <shape>
+                    <corners android:bottomRightRadius="@dimen/button_inner_radius" android:topRightRadius="@dimen/button_inner_radius"/>
+                    <solid android:color="@android:color/white"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

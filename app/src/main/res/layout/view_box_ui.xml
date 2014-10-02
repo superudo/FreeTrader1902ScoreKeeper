@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/box1"
+        android:layout_width="@dimen/box_ui_boxsize"
+        android:layout_height="@dimen/box_ui_boxsize"
+        android:layout_marginLeft="@dimen/box_ui_horizontal_spacing"
+        android:layout_marginRight="@dimen/box_ui_horizontal_spacing"
+        android:src="@drawable/box_ui_box"/>
+
+    <ImageView
+        android:id="@+id/box2"
+        android:layout_width="@dimen/box_ui_boxsize"
+        android:layout_height="@dimen/box_ui_boxsize"
+        android:layout_marginLeft="@dimen/box_ui_horizontal_spacing"
+        android:layout_marginRight="@dimen/box_ui_horizontal_spacing"
+        android:src="@drawable/box_ui_box"/>
+
+    <ImageView
+        android:id="@+id/box3"
+        android:layout_width="@dimen/box_ui_boxsize"
+        android:layout_height="@dimen/box_ui_boxsize"
+        android:layout_marginLeft="@dimen/box_ui_horizontal_spacing"
+        android:layout_marginRight="@dimen/box_ui_horizontal_spacing"
+        android:src="@drawable/box_ui_box"/>
+
+    <ImageView
+        android:id="@+id/box4"
+        android:layout_width="@dimen/box_ui_boxsize"
+        android:layout_height="@dimen/box_ui_boxsize"
+        android:layout_marginLeft="@dimen/box_ui_horizontal_spacing"
+        android:layout_marginRight="@dimen/box_ui_horizontal_spacing"
+        android:src="@drawable/box_ui_box"/>
+
+    <ImageView
+        android:id="@+id/box5"
+        android:layout_width="@dimen/box_ui_boxsize"
+        android:layout_height="@dimen/box_ui_boxsize"
+        android:layout_marginLeft="@dimen/box_ui_horizontal_spacing"
+        android:layout_marginRight="@dimen/box_ui_horizontal_spacing"
+        android:src="@drawable/box_ui_box"/>
+</LinearLayout>

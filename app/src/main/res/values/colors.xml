@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="month_row_color">#ff40caff</color>
+    <color name="cargo_red">#fff20000</color>
+    <color name="cargo_color">#ff000000</color>
+    <color name="background_color">#ffffa400</color>
+    <color name="blue">#ff17308d</color>
+    <color name="blue_transparent">#4417308d</color>
+    <color name="gold">#FFFFD700</color>
+    <color name="light_box">#ffa400</color>
+    <color name="light_box_transparent">#44ffa400</color>
+    <color name="light_gray50">#ccdcdcdc</color>
+</resources>
