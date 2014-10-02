@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".EventActivity"
-            android:label="@string/title_activity_event"></activity>
+            android:label="@string/title_activity_event"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

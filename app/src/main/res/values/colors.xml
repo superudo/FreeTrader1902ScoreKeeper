@@ -10,4 +10,6 @@
     <color name="light_box">#ffa400</color>
     <color name="light_box_transparent">#44ffa400</color>
     <color name="light_gray50">#ccdcdcdc</color>
+    <color name="equipment_row_bg0">#ffE0E0E0</color>
+    <color name="equipment_row_bg1">#ffC0C0C0</color>
 </resources>

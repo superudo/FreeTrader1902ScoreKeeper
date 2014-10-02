@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.beans.PropertyChangeEvent;
@@ -68,7 +68,9 @@ public class MainActivity extends Activity
 		findViewById(R.id.rowShotguns).setOnClickListener(this);
 		findViewById(R.id.rowArmor).setOnClickListener(this);
 
-		findViewById(R.id.rowGold).setOnClickListener(this);
+		findViewById(R.id.llGold).setOnClickListener(this);
+		findViewById(R.id.tMove).setOnClickListener(this);
+		findViewById(R.id.tEvent).setOnClickListener(this);
 		findViewById(R.id.rowMonth).setOnClickListener(this);
 
 		gameData.addChangeListener(this);
@@ -109,10 +111,6 @@ public class MainActivity extends Activity
 		int id = item.getItemId();
 		if (id == R.id.action_restart) {
 			RestartGame();
-			return true;
-		}
-		if (id == R.id.action_event) {
-			startActivity(new Intent(this, EventActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -181,7 +179,7 @@ public class MainActivity extends Activity
 		((TextView) findViewById(R.id.lblCargo)).setTextColor(c);
 
 		if (propName.equals(GameData.WINNER)) {
-			TableRow row = (TableRow) findViewById(R.id.rowMonth);
+			LinearLayout row = (LinearLayout) findViewById(R.id.rowMonth);
 			if (gameData.wonGame()) { // WINNER!
 				row.setBackgroundColor(Color.GREEN);
 				((TextView) findViewById(R.id.lblMonth)).setText("YOU WON!");
@@ -229,8 +227,11 @@ public class MainActivity extends Activity
 				case R.id.rowMonth:
 					FinishCurrentMonth();
 					break;
-				case R.id.rowGold:
+				case R.id.tMove:
 					MoveToNextCity();
+					break;
+				case R.id.tEvent:
+					startActivity(new Intent(this, EventActivity.class));
 					break;
 				default:
 					break;
