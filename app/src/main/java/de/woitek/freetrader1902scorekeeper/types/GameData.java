@@ -294,7 +294,7 @@ public class GameData {
         if (prefs != null) {
             month.setValue(prefs.getInt(MONTH, 1));
             setMoney(prefs.getInt(MONEY, 5));
-            for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+            for (String s : new String[]{CARGO, ENGINE}) {
                 setEquipment(s, prefs.getInt(s, 3));
             }
             for (String s : new String[]{SHOTGUNS, ARMOR}) {

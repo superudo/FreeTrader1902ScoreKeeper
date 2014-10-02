@@ -3,5 +3,6 @@
     <declare-styleable name="StyledRadioGroup">
         <attr name="display" format="string" />
         <attr name="values" format="string" />
+        <attr name="selected" format="boolean" />
     </declare-styleable>
 </resources>
