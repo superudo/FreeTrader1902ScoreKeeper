@@ -40,8 +40,16 @@ public class MainActivity extends Activity
 	private BoxUIView bMonth;
 
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		gameData.SaveState(outState);
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		gameData.RestoreState(savedInstanceState);
+
 		setContentView(R.layout.activity_main);
 
 		vGold = (TextView) findViewById(R.id.tGold);

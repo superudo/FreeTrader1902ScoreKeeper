@@ -1,5 +1,7 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
+import android.os.Bundle;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -267,27 +269,29 @@ public class GameData {
 		return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
 	}
 
-/*
     public void SaveState(Bundle outState) {
-		outState.putInt(MONTH, getMonth());
-		outState.putInt(MONEY, getMoney());
-		for (String s: new String[] {CARGO, ENGINE, SHOTGUNS, ARMOR}) {
-			outState.putInt(s, getEquipment(s));
-		}
-		for (String s: new String[] {PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-			outState.putInt(s, getCargo(s));
-		}
+	    if (outState != null) {
+		    outState.putInt(MONTH, getMonth());
+		    outState.putInt(MONEY, getMoney());
+		    for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+			    outState.putInt(s, getEquipment(s));
+		    }
+		    for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+			    outState.putInt(s, getCargo(s));
+		    }
+	    }
 	}
 
 	public void RestoreState(Bundle savedInstanceState) {
-		month.setValue(savedInstanceState.getInt(MONTH));
-		setMoney(savedInstanceState.getInt(MONEY));
-		for (String s: new String[] {CARGO, ENGINE, SHOTGUNS, ARMOR}) {
-			setEquipment(s, savedInstanceState.getInt(s));
-		}
-		for (String s: new String[] {PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-			setCargo(s, savedInstanceState.getInt(s));
+		if (savedInstanceState != null) {
+			month.setValue(savedInstanceState.getInt(MONTH));
+			setMoney(savedInstanceState.getInt(MONEY));
+			for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+				setEquipment(s, savedInstanceState.getInt(s));
+			}
+			for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+				setCargo(s, savedInstanceState.getInt(s));
+			}
 		}
 	}
-*/
 }
