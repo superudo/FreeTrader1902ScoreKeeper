@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape>
+            <solid android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_padding" android:left="@dimen/button_horizontal_padding" android:right="@dimen/button_horizontal_padding" android:top="@dimen/button_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/button_blue_transparent"/>
+            <stroke android:width="2dp" android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_padding" android:left="@dimen/button_horizontal_padding" android:right="@dimen/button_horizontal_padding" android:top="@dimen/button_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/button_blue"/>
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="0dp" android:right="2dp" android:top="2dp">
+                <shape>
+                    <solid android:color="@color/button_light_gray"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/button_blue"/>
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="0dp" android:right="2dp" android:top="2dp">
+                <shape>
+                    <solid android:color="@android:color/white"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

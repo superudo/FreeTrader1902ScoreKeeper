@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import de.woitek.freetrader1902scorekeeper.R;
 import de.woitek.freetrader1902scorekeeper.types.GameData;
-import de.woitek.freetrader1902scorekeeper.views.StyledRadioGroupView;
+import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
 
 public class CargoDialog extends Dialog implements View.OnClickListener {
 	private GameData data;
 	private String toSell;
 
-	private StyledRadioGroupView rgAction;
-	private StyledRadioGroupView rgAmount;
-	private StyledRadioGroupView rgPrice;
+	private StyledRadioGroup rgAction;
+	private StyledRadioGroup rgAmount;
+	private StyledRadioGroup rgPrice;
 
 	public CargoDialog(Activity a, GameData data, String sell) {
 		super(a);
@@ -37,14 +37,14 @@ public class CargoDialog extends Dialog implements View.OnClickListener {
 	private void init() {
 		((TextView) findViewById(R.id.tCargoTitle)).setText(toSell);
 
-		rgAction = (StyledRadioGroupView) findViewById(R.id.rbAction);
-		rgAmount = (StyledRadioGroupView) findViewById(R.id.rbAmount);
-		rgPrice = (StyledRadioGroupView) findViewById(R.id.rbPrice);
+		rgAction = (StyledRadioGroup) findViewById(R.id.rbAction);
+		rgAmount = (StyledRadioGroup) findViewById(R.id.rbAmount);
+		rgPrice = (StyledRadioGroup) findViewById(R.id.rbPrice);
 
 		rgAction.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				StyledRadioGroupView radioGroup = (StyledRadioGroupView) group;
+				StyledRadioGroup radioGroup = (StyledRadioGroup) group;
 				String selected = radioGroup.getSelectedItemValue();
 				if (selected.equals("Buy")) {
 					rgPrice.enableAll(true);

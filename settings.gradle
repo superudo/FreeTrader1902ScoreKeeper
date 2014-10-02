@@ -1,1 +1,1 @@
-include ':app', ':styledRadioGroupView'
+include ':app', ':styledradiogroup'

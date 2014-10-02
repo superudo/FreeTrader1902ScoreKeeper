@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FreeTrader1902ScoreKeeper.iml" filepath="$PROJECT_DIR$/FreeTrader1902ScoreKeeper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/styledRadioGroupView/styledRadioGroupView.iml" filepath="$PROJECT_DIR$/styledRadioGroupView/styledRadioGroupView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/styledradiogroup/styledradiogroup.iml" filepath="$PROJECT_DIR$/styledradiogroup/styledradiogroup.iml" />
     </modules>
   </component>
 </project>

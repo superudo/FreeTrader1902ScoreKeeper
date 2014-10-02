@@ -10,47 +10,14 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context="de.woitek.freetrader1902scorekeeper.EventActivity">
 
-    <RadioGroup
+    <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio_button_background_left"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center_horizontal"
-            android:text="Bandits"
-            android:textColor="@drawable/radio_button_text"/>
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio_button_background"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center_horizontal"
-            android:text="Bear"
-            android:textColor="@drawable/radio_button_text"/>
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio_button_background_right"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center_horizontal"
-            android:text="Police"
-            android:textColor="@drawable/radio_button_text"/>
-    </RadioGroup>
+        cust:display="Bandits;Bear;Police"
+    />
 
     <de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView
         android:id="@+id/lblAmount"
@@ -61,41 +28,18 @@
         android:layout_marginTop="24dp"
         android:text="YOUR TASK"
         android:textSize="@dimen/western_font_height"
-        cust:fontFaceName="@string/western_font_name">
+        cust:fontFaceName="@string/western_font_name" />
 
-    </de.woitek.freetrader1902scorekeeper.views.FlexibleFontTextView>
-
-    <RadioGroup
+    <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblAmount"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:orientation="horizontal">
+        cust:display="Defense;Attack"
+        />
 
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio_button_background_left"
-            android:button="@null"
-            android:checked="true"
-            android:gravity="center_horizontal"
-            android:text="Defense"
-            android:textColor="@drawable/radio_button_text"/>
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio_button_background_right"
-            android:button="@null"
-            android:checked="false"
-            android:gravity="center_horizontal"
-            android:text="Attack"
-            android:textColor="@drawable/radio_button_text"/>
-    </RadioGroup>
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -183,79 +127,21 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <de.woitek.libraries.styledradiogroup.StyledRadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                cust:display="1;2;3"
+            />
 
-                <RadioButton
-                    android:id="@+id/radioButton6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background_left"
-                    android:button="@null"
-                    android:checked="true"
-                    android:text="1"
-                    android:textColor="@drawable/radio_button_text"/>
-
-                <RadioButton
-                    android:id="@+id/radioButton7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@null"
-                    android:checked="false"
-                    android:text="2"
-                    android:textColor="@drawable/radio_button_text"/>
-
-                <RadioButton
-                    android:id="@+id/radioButton8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background_right"
-                    android:button="@null"
-                    android:checked="false"
-                    android:text="3"
-                    android:textColor="@drawable/radio_button_text"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <de.woitek.libraries.styledradiogroup.StyledRadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background_left"
-                    android:button="@null"
-                    android:checked="true"
-                    android:text="1"
-                    android:textColor="@drawable/radio_button_text"/>
-
-                <RadioButton
-                    android:id="@+id/radioButton10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@null"
-                    android:text="2"
-                    android:textColor="@drawable/radio_button_text"/>
-
-                <RadioButton
-                    android:id="@+id/radioButton11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_button_background_right"
-                    android:button="@null"
-                    android:text="3"
-                    android:textColor="@drawable/radio_button_text"/>
-            </RadioGroup>
+                cust:display="1;2;3"
+            />
         </TableRow>
 
         <TableRow
@@ -325,13 +211,4 @@
                 cust:fontFaceName="@string/western_font_name"/>
         </TableRow>
     </TableLayout>
-
-    <de.woitek.freetrader1902scorekeeper.views.StyledRadioGroupView
-        android:id="@+id/view2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tableLayout"
-        android:layout_centerHorizontal="true"
-        cust:display="1;2;3;4;5"/>
-
 </RelativeLayout>
