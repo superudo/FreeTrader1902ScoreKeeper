@@ -2,8 +2,8 @@ package de.woitek.freetrader1902scorekeeper;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
@@ -33,7 +33,11 @@ public class EventActivity extends Activity {
             b.setDisplayUseLogoEnabled(false);
             b.setDisplayHomeAsUpEnabled(true);
         }
-        gameData = GameData.CreateFromPreferences(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+
+        gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
+        if (gameData == null) {
+            gameData = new GameData();
+        }
 
         switcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
 
@@ -134,7 +138,9 @@ public class EventActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                gameData.SaveState(getPreferences(MODE_PRIVATE));
+                Intent mainIntent = new Intent(this, MainActivity.class);
+                mainIntent.putExtra("GameData", gameData);
+                startActivity(mainIntent);
                 finish();
             default:
                 break;

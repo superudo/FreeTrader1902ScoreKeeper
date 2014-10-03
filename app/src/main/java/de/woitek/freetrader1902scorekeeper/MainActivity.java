@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +43,10 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        gameData = GameData.CreateFromPreferences(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+        gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
+        if (gameData == null) {
+            gameData = new GameData();
+        }
 
 		setContentView(R.layout.activity_main);
 
@@ -236,10 +237,10 @@ public class MainActivity extends Activity
 					MoveToNextCity();
 					break;
 				case R.id.tEvent:
-                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-                    gameData.SaveState(prefs);
                     Intent eventIntent = new Intent(this, EventActivity.class);
+                    eventIntent.putExtra("GameData", gameData);
                     startActivity(eventIntent);
+                    finish();
                     break;
                 default:
                     break;

@@ -1,15 +1,18 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
-import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameData {
-	public static final String CARGO = "CARGO";
-	public static final String ENGINE = "ENGINE";
+public class GameData implements Parcelable {
+    public static final String CLASSNAME = "GAMEDATA";
+
+    public static final String CARGO = "CARGO";
+    public static final String ENGINE = "ENGINE";
 	public static final String ARMOR = "ARMOR";
 	public static final String SHOTGUNS = "SHOTGUNS";
 
@@ -22,287 +25,291 @@ public class GameData {
 	public static final String MONEY = "MONEY";
 
 	public static final String WINNER = "WINNER";
+    public static final Creator<GameData> CREATOR
+            = new Creator<GameData>() {
+        @Override
+        public GameData createFromParcel(Parcel parcel) {
+            return new GameData(parcel);
+        }
 
-	private HashMap<String, RangedInteger> equipment = null;
-	private HashMap<String, RangedInteger> cargo = null;
+        @Override
+        public GameData[] newArray(int size) {
+            return new GameData[size];
+        }
+    };
+    private HashMap<String, RangedInteger> equipment = null;
+    private HashMap<String, RangedInteger> cargo = null;
 	private HashMap<String, Integer> equipmentPrice = null;
 	private int[] monthlyRate;
 	private int gameState;
-
 	private RangedInteger month;
 	private RangedInteger money;
-
 	private ArrayList<PropertyChangeListener> listener;
 
-	public GameData() {
-		InitGameData();
-		listener = new ArrayList<PropertyChangeListener>();
-	}
-
-    public static GameData CreateFromPreferences(SharedPreferences prefs) {
-        GameData data = new GameData();
-        data.RestoreState(prefs);
-        return data;
+    public GameData() {
+        init();
     }
 
-	public void InitGameData() {
-		if (equipment == null) {
-			equipment = new HashMap<String, RangedInteger>(4);
-		}
-		if (equipmentPrice == null) {
-			equipmentPrice = new HashMap<String, Integer>(4);
-		}
-		if (cargo == null) {
-			cargo = new HashMap<String, RangedInteger>(4);
-		}
+    public GameData(Parcel parcel) {
+        init();
+        month.setValue(parcel.readInt());
+        money.setValue(parcel.readInt());
+        for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+            setEquipment(s, parcel.readInt());
+        }
+        for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+            setCargo(s, parcel.readInt());
+        }
+    }
 
-		equipment.clear();
-		equipment.put(CARGO, new RangedInteger(0, 5, 3));
-		equipment.put(ENGINE, new RangedInteger(0, 5, 3));
-		equipment.put(ARMOR, new RangedInteger(0, 5, 2));
-		equipment.put(SHOTGUNS, new RangedInteger(0, 5, 2));
+    private void init() {
+        InitGameData();
+        listener = new ArrayList<PropertyChangeListener>();
+    }
 
-		cargo.clear();
-		cargo.put(PRODUCE, new RangedInteger(0, 5, 0));
-		cargo.put(MUNITIONS, new RangedInteger(0, 5, 0));
-		cargo.put(TEXTILES, new RangedInteger(0, 5, 0));
-		cargo.put(MOONSHINE, new RangedInteger(0, 5, 0));
+    public void InitGameData() {
+        if (equipment == null) {
+            equipment = new HashMap<String, RangedInteger>(4);
+        }
+        if (equipmentPrice == null) {
+            equipmentPrice = new HashMap<String, Integer>(4);
+        }
+        if (cargo == null) {
+            cargo = new HashMap<String, RangedInteger>(4);
+        }
 
-		equipmentPrice.clear();
-		equipmentPrice.put(CARGO, 5);
-		equipmentPrice.put(ENGINE, 3);
-		equipmentPrice.put(SHOTGUNS, 4);
-		equipmentPrice.put(ARMOR, 5);
+        equipment.clear();
+        equipment.put(CARGO, new RangedInteger(0, 5, 3));
+        equipment.put(ENGINE, new RangedInteger(0, 5, 3));
+        equipment.put(ARMOR, new RangedInteger(0, 5, 2));
+        equipment.put(SHOTGUNS, new RangedInteger(0, 5, 2));
 
-		month = new RangedInteger(1, 4, 1);
-		money = new RangedInteger(0, 20, 5);
+        cargo.clear();
+        cargo.put(PRODUCE, new RangedInteger(0, 5, 0));
+        cargo.put(MUNITIONS, new RangedInteger(0, 5, 0));
+        cargo.put(TEXTILES, new RangedInteger(0, 5, 0));
+        cargo.put(MOONSHINE, new RangedInteger(0, 5, 0));
 
-		monthlyRate = new int[]{0, 5, 10, 10, 15};
+        equipmentPrice.clear();
+        equipmentPrice.put(CARGO, 5);
+        equipmentPrice.put(ENGINE, 3);
+        equipmentPrice.put(SHOTGUNS, 4);
+        equipmentPrice.put(ARMOR, 5);
 
-		gameState = 0;
+        month = new RangedInteger(1, 4, 1);
+        money = new RangedInteger(0, 20, 5);
+
+        monthlyRate = new int[]{0, 5, 10, 10, 15};
+
+        gameState = 0;
+    }
+
+    protected boolean CargoOk(int oldValue, int newValue) {
+        return (getCurrentCargoAmount() - oldValue + newValue <= equipment.get(CARGO).getValue());
+    }
+
+    private boolean IsDifferent(int oldValue, int newValue) {
+        return (oldValue != newValue);
+    }
+
+    public int getEquipment(String type) {
+        if (equipment.containsKey(type)) {
+            return equipment.get(type).getValue();
+        }
+        throw new IllegalArgumentException(type + " is no valid equipment key.");
+    }
+
+    protected void setEquipment(String type, int value) {
+        if (equipment.containsKey(type)) {
+            int oldValue = equipment.get(type).getValue();
+            if (IsDifferent(oldValue, value)) {
+                equipment.get(type).setValue(value);
+                notifyListeners(this, type, oldValue, value);
+            }
+        } else {
+            throw new IllegalArgumentException(type + " is no valid equipment key.");
+        }
 	}
 
-	protected boolean CargoOk(int oldValue, int newValue) {
-		return (getCurrentCargoAmount() - oldValue + newValue <= equipment.get(CARGO).getValue());
-	}
+    public Integer getCargo(String type) {
+        if (cargo.containsKey(type)) {
+            return cargo.get(type).getValue();
+        }
+        throw new IllegalArgumentException(type + " is no valid cargo key.");
+    }
 
-	private boolean IsDifferent(int oldValue, int newValue) {
-		return (oldValue != newValue);
-	}
+    protected void setCargo(String type, int value) {
+        if (cargo.containsKey(type)) {
+            int oldValue = cargo.get(type).getValue();
+            if (IsDifferent(oldValue, value) && CargoOk(oldValue, value)) {
+                cargo.get(type).setValue(value);
+                notifyListeners(this, type, oldValue, value);
+            }
+        } else {
+            throw new IllegalArgumentException(type + " is no valid cargo key.");
+        }
+    }
 
-	public int getEquipment(String type) {
-		if (equipment.containsKey(type)) {
-			return equipment.get(type).getValue();
-		}
-		throw new IllegalArgumentException(type + " is no valid equipment key.");
-	}
+    protected void nextMonth() {
+        int oldValue = month.incValue();
+        notifyListeners(this, MONTH, oldValue, month.getValue());
+    }
 
-	protected void setEquipment(String type, int value) {
-		if (equipment.containsKey(type)) {
-			int oldValue = equipment.get(type).getValue();
-			if (IsDifferent(oldValue, value)) {
-				equipment.get(type).setValue(value);
-				notifyListeners(this, type, oldValue, value);
-			}
-		} else {
-			throw new IllegalArgumentException(type + " is no valid equipment key.");
-		}
-	}
+    /*
+        protected int getHenchmenBaseValue() {
+            return month.getValue() - 1;
+        }
+    */
+    public int getCurrentCargoAmount() {
+        int sum = 0;
+        for (RangedInteger i : cargo.values()) {
+            sum += i.getValue();
+        }
+        return sum;
+    }
 
-	public Integer getCargo(String type) {
-		if (cargo.containsKey(type)) {
-			return cargo.get(type).getValue();
-		}
-		throw new IllegalArgumentException(type + " is no valid cargo key.");
-	}
+    private void notifyListeners(Object object, String property, int oldValue, int newValue) {
+        for (PropertyChangeListener name : listener) {
+            name.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
+        }
+    }
 
-	protected void setCargo(String type, int value) {
-		if (cargo.containsKey(type)) {
-			int oldValue = cargo.get(type).getValue();
-			if (IsDifferent(oldValue, value) && CargoOk(oldValue, value)) {
-				cargo.get(type).setValue(value);
-				notifyListeners(this, type, oldValue, value);
-			}
-		} else {
-			throw new IllegalArgumentException(type + " is no valid cargo key.");
-		}
-	}
+    public void addChangeListener(PropertyChangeListener newListener) {
+        listener.add(newListener);
+    }
 
-	protected void nextMonth() {
-		int oldValue = month.incValue();
-		notifyListeners(this, MONTH, oldValue, month.getValue());
-	}
+    public int getMonth() {
+        return month.getValue();
+    }
 
-	/*
-		protected int getHenchmenBaseValue() {
-			return month.getValue() - 1;
-		}
-	*/
-	public int getCurrentCargoAmount() {
-		int sum = 0;
-		for (RangedInteger i : cargo.values()) {
-			sum += i.getValue();
-		}
-		return sum;
-	}
+    public int getMoney() {
+        return money.getValue();
+    }
 
-	private void notifyListeners(Object object, String property, int oldValue, int newValue) {
-		for (PropertyChangeListener name : listener) {
-			name.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
-		}
-	}
+    public void setMoney(int value) {
+        if (money.getValue() != value) {
+            notifyListeners(this, MONEY, money.setValue(value), money.getValue());
+        }
+    }
 
-	public void addChangeListener(PropertyChangeListener newListener) {
-		listener.add(newListener);
-	}
+    public boolean mayBuyCargo(int amount, int price, String toBuy) {
+        return (amount > 0) && ((money.getValue() - amount * price) > 0) && CargoOk(cargo.get(toBuy).getValue(), amount);
+    }
 
-	public int getMonth() {
-		return month.getValue();
-	}
+    public boolean maySellCargo(int amount, String toSell) {
+        return (amount <= cargo.get(toSell).getValue());
+    }
 
-	public int getMoney() {
-		return money.getValue();
-	}
+    public void buyCargo(int amount, int price, String toBuy) {
+        if (mayBuyCargo(amount, price, toBuy)) {
+            setCargo(toBuy, getCargo(toBuy) + amount);
+            setMoney(money.getValue() - amount * price);
+        }
+    }
 
-	public void setMoney(int value) {
-		if (money.getValue() != value) {
-			notifyListeners(this, MONEY, money.setValue(value), money.getValue());
-		}
-	}
+    public void sellCargo(int amount, int price, String toSell) {
+        if (maySellCargo(amount, toSell)) {
+            setCargo(toSell, getCargo(toSell) - amount);
+            setMoney(money.getValue() + amount * price);
+        }
+    }
 
-	public boolean mayBuyCargo(int amount, int price, String toBuy) {
-		return (amount > 0) && ((money.getValue() - amount * price) > 0) && CargoOk(cargo.get(toBuy).getValue(), amount);
-	}
+    public void dropCargo(int amount, String toSell) {
+        setCargo(toSell, getCargo(toSell) - amount);
+    }
 
-	public boolean maySellCargo(int amount, String toSell) {
-		return (amount <= cargo.get(toSell).getValue());
-	}
+    public boolean mayBuyEquipment(int amount, String toBuy) {
+        return (((amount * equipmentPrice.get(toBuy)) <= getMoney()) && ((equipment.get(toBuy).getValue() + amount) <= equipment.get(toBuy).getMax()));
+    }
 
-	public void buyCargo(int amount, int price, String toBuy) {
-		if (mayBuyCargo(amount, price, toBuy)) {
-			setCargo(toBuy, getCargo(toBuy) + amount);
-			setMoney(money.getValue() - amount * price);
-		}
-	}
+    public void buyEquipment(int amount, String toBuy) {
+        if (mayBuyEquipment(amount, toBuy)) {
+            setEquipment(toBuy, equipment.get(toBuy).getValue() + amount);
+            setMoney(getMoney() - amount * equipmentPrice.get(toBuy));
+        }
+    }
 
-	public void sellCargo(int amount, int price, String toSell) {
-		if (maySellCargo(amount, toSell)) {
-			setCargo(toSell, getCargo(toSell) - amount);
-			setMoney(money.getValue() + amount * price);
-		}
-	}
+    public boolean maySellEquipment(int amount, String toSell) {
+        return (amount <= equipment.get(toSell).getValue());
+    }
 
-	public void dropCargo(int amount, String toSell) {
-		setCargo(toSell, getCargo(toSell) - amount);
-	}
+    public void sellEquipment(int amount, String toSell) {
+        if (maySellEquipment(amount, toSell)) {
+            setEquipment(toSell, equipment.get(toSell).getValue() - amount);
+            setMoney(getMoney() + amount * equipmentPrice.get(toSell));
+        }
+    }
 
-	public boolean mayBuyEquipment(int amount, String toBuy) {
-		return (((amount * equipmentPrice.get(toBuy)) <= getMoney()) && ((equipment.get(toBuy).getValue() + amount) <= equipment.get(toBuy).getMax()));
-	}
+    public boolean mayDropEquipment(int amount, String toDrop) {
+        return maySellEquipment(amount, toDrop);
+    }
 
-	public void buyEquipment(int amount, String toBuy) {
-		if (mayBuyEquipment(amount, toBuy)) {
-			setEquipment(toBuy, equipment.get(toBuy).getValue() + amount);
-			setMoney(getMoney() - amount * equipmentPrice.get(toBuy));
-		}
-	}
+    public void dropEquipment(int amount, String toDrop) {
+        if (mayDropEquipment(amount, toDrop)) {
+            setEquipment(toDrop, equipment.get(toDrop).getValue() - amount);
+        }
+    }
 
-	public boolean maySellEquipment(int amount, String toSell) {
-		return (amount <= equipment.get(toSell).getValue());
-	}
+    public boolean gameFinished() {
+        return (gameState != 0);
+    }
 
+    public boolean wonGame() {
+        return (gameState == 1);
+    }
 
-	public void sellEquipment(int amount, String toSell) {
-		if (maySellEquipment(amount, toSell)) {
-			setEquipment(toSell, equipment.get(toSell).getValue() - amount);
-			setMoney(getMoney() + amount * equipmentPrice.get(toSell));
-		}
-	}
+    public boolean lostGame() {
+        return (gameState == -1);
+    }
 
-	public boolean mayDropEquipment(int amount, String toDrop) {
-		return maySellEquipment(amount, toDrop);
-	}
+    protected void setGameState(int value) {
+        if (gameState != value) {
+            gameState = value;
+            notifyListeners(this, WINNER, 0, gameState);
+        }
+    }
 
-	public void dropEquipment(int amount, String toDrop) {
-		if (mayDropEquipment(amount, toDrop)) {
-			setEquipment(toDrop, equipment.get(toDrop).getValue() - amount);
-		}
-	}
+    public void finishMonth() {
+        if (getMoney() < monthlyRate[getMonth()]) {
+            // loser
+            setGameState(-1);
+        } else {
+            setMoney(getMoney() - monthlyRate[getMonth()]);
+            if (getMonth() < month.getMax() - 1) {
+                nextMonth();
+            } else {
+                // winner!!!
+                setGameState(1);
+            }
+        }
+    }
 
-	public boolean gameFinished() {
-		return (gameState != 0);
-	}
+    public boolean isCargo(String propName) {
+        return propName.equals(PRODUCE) || propName.equals(MUNITIONS) || propName.equals(TEXTILES) || propName.equals(MOONSHINE);
+    }
 
-	public boolean wonGame() {
-		return (gameState == 1);
-	}
-
-	public boolean lostGame() {
-		return (gameState == -1);
-	}
-
-	protected void setGameState(int value) {
-		if (gameState != value) {
-			gameState = value;
-			notifyListeners(this, WINNER, 0, gameState);
-		}
-	}
-
-	public void finishMonth() {
-		if (getMoney() < monthlyRate[getMonth()]) {
-			// loser
-			setGameState(-1);
-		} else {
-			setMoney(getMoney() - monthlyRate[getMonth()]);
-			if (getMonth() < month.getMax() - 1) {
-				nextMonth();
-			} else {
-				// winner!!!
-				setGameState(1);
-			}
-		}
-	}
-
-	public boolean isCargo(String propName) {
-		return propName.equals(PRODUCE) || propName.equals(MUNITIONS) || propName.equals(TEXTILES) || propName.equals(MOONSHINE);
-	}
-
-	public boolean mayMove() {
-		return (getMoney() > 0);
-	}
+    public boolean mayMove() {
+        return (getMoney() > 0);
+    }
 
 	public int getFreeCargoAmount() {
 		return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
 	}
 
-    public void SaveState(SharedPreferences prefs) {
-        if (prefs != null) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt(MONTH, getMonth());
-            editor.putInt(MONEY, getMoney());
-            for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
-                editor.putInt(s, getEquipment(s));
-            }
-            for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-                editor.putInt(s, getCargo(s));
-            }
-            editor.commit();
-        }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void RestoreState(SharedPreferences prefs) {
-        if (prefs != null) {
-            month.setValue(prefs.getInt(MONTH, 1));
-            setMoney(prefs.getInt(MONEY, 5));
-            for (String s : new String[]{CARGO, ENGINE}) {
-                setEquipment(s, prefs.getInt(s, 3));
-            }
-            for (String s : new String[]{SHOTGUNS, ARMOR}) {
-                setEquipment(s, prefs.getInt(s, 2));
-            }
-            for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-                setCargo(s, prefs.getInt(s, 0));
-            }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(getMonth());
+        parcel.writeInt(getMoney());
+        for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+            parcel.writeInt(getEquipment(s));
+        }
+        for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+            parcel.writeInt(getCargo(s));
         }
     }
 }
