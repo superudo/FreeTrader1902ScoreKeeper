@@ -25,6 +25,7 @@ public class GameData implements Parcelable {
 	public static final String MONEY = "MONEY";
 
 	public static final String WINNER = "WINNER";
+
     public static final Creator<GameData> CREATOR
             = new Creator<GameData>() {
         @Override
@@ -312,4 +313,5 @@ public class GameData implements Parcelable {
             parcel.writeInt(getCargo(s));
         }
     }
+
 }

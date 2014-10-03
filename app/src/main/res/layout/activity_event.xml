@@ -17,7 +17,8 @@
         class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        cust:display="Bandits;Bear;Police" />
+        cust:display="Bandit;Bear;Police"
+        cust:selected="false" />
 
     <ViewSwitcher
         android:id="@+id/viewSwitcher"
@@ -25,223 +26,243 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
-        <LinearLayout
+        <ScrollView
             android:id="@+id/llBandit"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <view
-                android:id="@+id/lblYourTask"
-                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="YOUR TASK"
-                android:textSize="36dp" />
-
-            <view
-                android:id="@+id/rgTask"
-                class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                cust:display="Defense;Attack"
-                cust:selected="false" />
-
-            <TableLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp">
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-                <TableRow
+                <view
+                    android:id="@+id/rgMultiplier"
+                    class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    cust:display="x1;x2;x3"
+                    cust:selected="false" />
+
+                <view
+                    android:id="@+id/lblYourTask"
+                    class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="YOUR TASK"
+                    android:textSize="36dp" />
+
+                <view
+                    android:id="@+id/rgTask"
+                    class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    cust:display="Defense;Attack"
+                    cust:selected="false" />
+
+                <TableLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp">
 
-                    <view
-                        android:id="@+id/lblYourStats"
-                        class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="YOUR STATS"
-                        android:textSize="24dp" />
-
-                    <view
-                        android:id="@+id/lblTheirStats"
-                        class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="THEIR STATS"
-                        android:textSize="24dp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="6dp">
-
-                    <TextView
-                        android:id="@+id/lblYourBonus"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="ARMOR: 3"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/lblTheirBonus"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="MONTH BONUS: 3"
-                        android:textSize="14dp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="3dp">
-
-                    <TextView
-                        android:id="@+id/lblYourStateType"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="DEFENSE"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/lblTheirStateType"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="AGGRESSION"
-                        android:textSize="14dp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="3dp">
-
-                    <view
-                        android:id="@+id/rgYourStat"
-                        class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        cust:display="1;2;3" />
-
-                    <view
-                        android:id="@+id/rgTheirStat"
-                        class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        cust:display="1;2;3" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="18dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center"
-                        android:layout_margin="12dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rounded_edge_field"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="14dp">
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
 
                         <view
-                            android:id="@+id/lblYourFinalStat"
+                            android:id="@+id/lblYourStats"
                             class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="DEFENSE"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="YOUR STATS"
                             android:textSize="24dp" />
 
                         <view
-                            android:id="@+id/tYourFinalStat"
+                            android:id="@+id/lblTheirStats"
                             class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="5"
-                            android:textSize="48dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center"
-                        android:layout_margin="12dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rounded_edge_field"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="14dp">
-
-                        <view
-                            android:id="@+id/lblTheirFinalStat"
-                            class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ATTACK"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="THEIR STATS"
                             android:textSize="24dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="6dp">
+
+                        <TextView
+                            android:id="@+id/lblYourBonus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="ARMOR / SHOTGUNS"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/lblTheirBonus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="MONTH BONUS"
+                            android:textSize="14dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="3dp">
+
+                        <TextView
+                            android:id="@+id/lblYourStateType"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="MODIFIER"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/lblTheirStateType"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:text="MODIFIER"
+                            android:textSize="14dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="3dp">
 
                         <view
-                            android:id="@+id/tTheirFinalStat"
-                            class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/rgYourStat"
+                            class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="4"
-                            android:textSize="48dp" />
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            cust:display="1;2;3"
+                            cust:selected="false" />
 
-                    </LinearLayout>
-                </TableRow>
-            </TableLayout>
+                        <view
+                            android:id="@+id/rgTheirStat"
+                            class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            cust:display="1;2;3"
+                            cust:selected="false" />
+                    </TableRow>
 
-            <view
-                android:id="@+id/lblOutcome"
-                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="YOU WON THE FIGHT"
-                android:textSize="36dp" />
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="18dp">
 
-            <TextView
-                android:id="@+id/lblRules"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:text="You can fight back or try to get away with your truck."
-                android:textSize="14dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center"
+                            android:layout_margin="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edge_field"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="14dp">
 
-        </LinearLayout>
+                            <view
+                                android:id="@+id/lblYourFinalStat"
+                                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="YOUR"
+                                android:textSize="24dp" />
 
-        <LinearLayout
+                            <view
+                                android:id="@+id/tYourFinalStat"
+                                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="0"
+                                android:textSize="48dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center"
+                            android:layout_margin="12dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_edge_field"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <view
+                                android:id="@+id/lblTheirFinalStat"
+                                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="THEIRS"
+                                android:textSize="24dp" />
+
+                            <view
+                                android:id="@+id/tTheirFinalStat"
+                                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="0"
+                                android:textSize="48dp" />
+
+                        </LinearLayout>
+                    </TableRow>
+                </TableLayout>
+
+                <view
+                    android:id="@+id/lblOutcome"
+                    class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="SELECT TASK AND MODIFIERS"
+                    android:textSize="36dp" />
+
+                <TextView
+                    android:id="@+id/lblRules"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="You can fight back or try to get away with your truck."
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
             android:id="@+id/llPolice"
             android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -255,8 +276,7 @@
                 android:text="STOP POLICE"
                 android:textSize="36dp" />
         </LinearLayout>
-
+        </ScrollView>
     </ViewSwitcher>
-
 
 </LinearLayout>
