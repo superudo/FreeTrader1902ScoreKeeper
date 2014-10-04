@@ -16,13 +16,9 @@ public class GameFight extends Observable {
 
     protected void notifyIfFightStateChanged(Command cmd) {
         if (cmd.execute()) {
-            triggerObservers();
+            setChanged();
+            notifyObservers();
         }
-    }
-
-    private void triggerObservers() {
-        setChanged();
-        notifyObservers();
     }
 
     public void setEnemyMight(final int might) {

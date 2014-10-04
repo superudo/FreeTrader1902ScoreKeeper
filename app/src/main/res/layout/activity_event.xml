@@ -27,6 +27,108 @@
         android:layout_gravity="center_horizontal">
 
         <ScrollView
+            android:id="@+id/llPolice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            view
+                android:id="@+id/lblPolice"
+                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="STOP POLICE"
+                android:textSize="36dp" />
+
+                <view
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                    android:id="@+id/lblPoliceOutcome"
+                    android:textSize="36dp"
+                    android:text="CAUGHT WITH ILLEGAL GOODS."
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='The Constable will fine you. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.'
+                    android:id="@+id/lblPoliceRule"
+                    android:layout_marginTop="18dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <view
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                            android:id="@+id/view"
+                            android:text="CONSTABLE FINE"
+                            android:textSize="20dp" />
+
+                        <view
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                            android:id="@+id/view3"
+                            android:layout_marginTop="12dp"
+                            cust:display="1;2;3"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <view
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                            android:id="@+id/view2"
+                            android:text="LAW LEVEL"
+                            android:textSize="20dp" />
+
+                        <view
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            class="de.woitek.libraries.styledradiogroup.StyledRadioGroup"
+                            android:id="@+id/view4"
+                            android:layout_marginTop="12dp"
+                            cust:display="0;1;2;3"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="You have to pay $ X. If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over." />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
             android:id="@+id/llBandit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -258,27 +360,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <ScrollView
-            android:id="@+id/llPolice"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <view
-                android:id="@+id/view3"
-                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="STOP POLICE"
-                android:textSize="36dp" />
-        </LinearLayout>
-        </ScrollView>
     </ViewSwitcher>
 
 </LinearLayout>

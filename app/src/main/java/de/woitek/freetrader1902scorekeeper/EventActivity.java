@@ -126,15 +126,15 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
             case 0: // Bandit
                 gameFight.setEnemy(GameFight.Enemy.HIGHWAYMAN);
                 findViewById(R.id.rgMultiplier).setVisibility(View.VISIBLE);
-                switcher.setDisplayedChild(0);
+                switcher.setDisplayedChild(1);
                 break;
             case 1: // Bear
                 gameFight.setEnemy(GameFight.Enemy.BEAR);
                 findViewById(R.id.rgMultiplier).setVisibility(View.INVISIBLE);
-                switcher.setDisplayedChild(0);
+                switcher.setDisplayedChild(1);
                 break;
             case 2: // Police
-                switcher.setDisplayedChild(1);
+                switcher.setDisplayedChild(0);
                 break;
         }
     }
