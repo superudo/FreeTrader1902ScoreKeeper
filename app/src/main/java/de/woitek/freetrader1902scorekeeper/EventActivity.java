@@ -88,7 +88,7 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
         switch (fight) {
             case OFFENSE:
                 a.append(R.id.lblYourBonus, String.format("%s: %d", GameData.SHOTGUNS, gameData.getEquipment(GameData.SHOTGUNS)));
-                a.append(R.id.lblTheirBonus, String.format("MONTH BONUS: %d", gameData.getMonth() + 1));
+                a.append(R.id.lblTheirBonus, String.format("MONTH BONUS: %d", gameData.getMonth() - 1));
                 a.append(R.id.lblYourStateType, "AGGRESSION");
                 a.append(R.id.lblTheirStateType, "DEFENSE");
                 a.append(R.id.lblYourFinalStat, "ATTACK");
@@ -96,7 +96,7 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
                 break;
             case DEFENSE:
                 a.append(R.id.lblYourBonus, String.format("%s: %d", GameData.ARMOR, gameData.getEquipment(GameData.ARMOR)));
-                a.append(R.id.lblTheirBonus, String.format("MONTH BONUS: %d", gameData.getMonth() + 1));
+                a.append(R.id.lblTheirBonus, String.format("MONTH BONUS: %d", gameData.getMonth() - 1));
                 a.append(R.id.lblYourStateType, "DEFENSE");
                 a.append(R.id.lblTheirStateType, "AGGRESSION");
                 a.append(R.id.lblYourFinalStat, "DEFENSE");
@@ -193,15 +193,13 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         if (propertyChangeEvent.getPropertyName().equals(GameFight.FIGHTEVENT)) {
-            boolean oldFightState = ((Boolean) propertyChangeEvent.getOldValue()).booleanValue();
-            boolean newFightState = ((Boolean) propertyChangeEvent.getNewValue()).booleanValue();
+            boolean fightOk = (Boolean) propertyChangeEvent.getNewValue();
             SparseArray<String> a = new SparseArray<String>();
-            if (newFightState == true) { // Fight result
+            if (fightOk) { // Fight result
                 a.append(R.id.tYourFinalStat, String.format("%d", gameFight.getPlayerFightValue()));
                 a.append(R.id.tTheirFinalStat, String.format("%d", gameFight.getEnemyFightValue()));
                 if (gameFight.hasPlayerWon()) {
                     a.append(R.id.lblOutcome, "YOU HAVE WON THE FIGHT");
-
                     if (gameFight.getFight() == GameFight.Fight.DEFENSE) {
                         a.append(R.id.lblRules, "You may now fight back or try to flee by drawing another event card.");
                     } else { // OFFENSE

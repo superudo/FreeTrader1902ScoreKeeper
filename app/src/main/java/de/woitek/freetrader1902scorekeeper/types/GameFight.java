@@ -20,21 +20,11 @@ public class GameFight {
         this.gameData = gameData;
     }
 
-    public GameFight(GameData gameData, Enemy enemy) {
-        this.gameData = gameData;
-        mEnemy = enemy;
-        if (enemy == Enemy.BEAR) {
-            mEnemyMight = 2;
-        }
-    }
-
     protected void notifyIfFightStateChanged(Command cmd) {
         boolean oldFightable = canFight();
         cmd.execute();
         boolean newFightable = canFight();
-        if (oldFightable != newFightable) {
-            notifyListeners(this, FIGHTEVENT, oldFightable, newFightable);
-        }
+        notifyListeners(this, FIGHTEVENT, oldFightable, newFightable);
     }
 
     public void setEnemyMight(final int might) {
@@ -66,7 +56,7 @@ public class GameFight {
 
     public boolean canFight() {
         return (mEnemy != Enemy.NOBODY) && (mFight != Fight.NOFIGHT)
-                && (mEnemyMight > 0)
+                && ((mEnemy == Enemy.BEAR) || (mEnemyMight > 0))
                 && (mEnemyModifier > 0) && (mPlayerModifier > 0);
     }
 
@@ -84,9 +74,14 @@ public class GameFight {
     public int getEnemyFightValue() {
         int value = 0;
         if (canFight()) {
-            value += mEnemyMight;
+            if (mEnemy == Enemy.BEAR) {
+                value += 2;
+                value += 2 * mEnemyModifier;
+            } else {
+                value += mEnemyMight;
+                value += mEnemyModifier;
+            }
             value += gameData.getMonth() - 1;
-            value += ((mEnemy == Enemy.BEAR) ? 2 : 1) * mEnemyModifier;
         }
         return value;
     }
@@ -97,7 +92,7 @@ public class GameFight {
             if (mFight == Fight.OFFENSE) {
                 won = getPlayerFightValue() > getEnemyFightValue();
             } else {
-                won = getEnemyFightValue() > getPlayerFightValue();
+                won = getEnemyFightValue() <= getPlayerFightValue();
             }
         }
         return won;
