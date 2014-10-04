@@ -13,14 +13,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.freetrader1902scorekeeper.types.GameFight;
 import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
 
-public class EventActivity extends Activity implements RadioGroup.OnCheckedChangeListener, PropertyChangeListener {
+public class EventActivity extends Activity implements RadioGroup.OnCheckedChangeListener, Observer {
     public final String CLASSID = "EventActivity";
 
     GameData gameData;
@@ -166,7 +166,7 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
         ((RadioGroup) findViewById(R.id.rgYourStat)).setOnCheckedChangeListener(this);
         ((RadioGroup) findViewById(R.id.rgTheirStat)).setOnCheckedChangeListener(this);
 
-        gameFight.addChangeListener(this);
+        gameFight.addObserver(this);
     }
 
     @Override
@@ -191,41 +191,38 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-        if (propertyChangeEvent.getPropertyName().equals(GameFight.FIGHTEVENT)) {
-            boolean fightOk = (Boolean) propertyChangeEvent.getNewValue();
-            SparseArray<String> a = new SparseArray<String>();
-            if (fightOk) { // Fight result
-                a.append(R.id.tYourFinalStat, String.format("%d", gameFight.getPlayerFightValue()));
-                a.append(R.id.tTheirFinalStat, String.format("%d", gameFight.getEnemyFightValue()));
-                if (gameFight.hasPlayerWon()) {
-                    a.append(R.id.lblOutcome, "YOU HAVE WON THE FIGHT");
-                    if (gameFight.getFight() == GameFight.Fight.DEFENSE) {
-                        a.append(R.id.lblRules, "You may now fight back or try to flee by drawing another event card.");
-                    } else { // OFFENSE
-                        if (gameFight.getEnemy() == GameFight.Enemy.HIGHWAYMAN) {
-                            a.append(R.id.lblRules,
-                                    String.format("You get $ %d as a bonus for killing these bandits. You may now proceed to the next city. Use the sell modifiers at the bandit card to calculate prices.",
-                                            gameFight.getEnemyBonusValue()));
-                        } else {
-                            a.append(R.id.lblRules, "You may now proceed to the next city. Use the sell modifiers at the bear card to calculate prices.");
-                        }
+    public void update(Observable observable, Object o) {
+        SparseArray<String> a = new SparseArray<String>();
+        if (gameFight.canFight()) { // Fight result
+            a.append(R.id.tYourFinalStat, String.format("%d", gameFight.getPlayerFightValue()));
+            a.append(R.id.tTheirFinalStat, String.format("%d", gameFight.getEnemyFightValue()));
+            if (gameFight.hasPlayerWon()) {
+                a.append(R.id.lblOutcome, "YOU HAVE WON THE FIGHT");
+                if (gameFight.getFight() == GameFight.Fight.DEFENSE) {
+                    a.append(R.id.lblRules, "You may now fight back or try to flee by drawing another event card.");
+                } else { // OFFENSE
+                    if (gameFight.getEnemy() == GameFight.Enemy.HIGHWAYMAN) {
+                        a.append(R.id.lblRules,
+                                String.format("You get $ %d as a bonus for killing these bandits. You may now proceed to the next city. Use the sell modifiers at the bandit card to calculate prices.",
+                                        gameFight.getEnemyBonusValue()));
+                    } else {
+                        a.append(R.id.lblRules, "You may now proceed to the next city. Use the sell modifiers at the bear card to calculate prices.");
                     }
-                } else {
-                    a.append(R.id.lblOutcome, "YOU LOST THE FIGHT");
-                    a.append(R.id.lblRules, "You loose one part of your truck. You may now fight back or try to flee by drawing another event card.");
                 }
-            } else { // No fight
-                a.append(R.id.tYourFinalStat, "0");
-                a.append(R.id.tTheirFinalStat, "0");
-                a.append(R.id.lblRules, "");
-                a.append(R.id.lblOutcome, "");
+            } else {
+                a.append(R.id.lblOutcome, "YOU LOST THE FIGHT");
+                a.append(R.id.lblRules, "You loose one part of your truck. You may now fight back or try to flee by drawing another event card.");
             }
+        } else { // No fight
+            a.append(R.id.tYourFinalStat, "0");
+            a.append(R.id.tTheirFinalStat, "0");
+            a.append(R.id.lblRules, "");
+            a.append(R.id.lblOutcome, "");
+        }
 
-            final int N = a.size();
-            for (int i = 0; i < N; i++) {
-                ((TextView) findViewById(a.keyAt(i))).setText(a.valueAt(i));
-            }
+        final int N = a.size();
+        for (int i = 0; i < N; i++) {
+            ((TextView) findViewById(a.keyAt(i))).setText(a.valueAt(i));
         }
     }
 }

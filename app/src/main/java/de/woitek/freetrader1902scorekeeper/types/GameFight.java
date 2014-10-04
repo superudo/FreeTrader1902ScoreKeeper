@@ -1,12 +1,8 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
+import java.util.Observable;
 
-public class GameFight {
-    public final static String FIGHTEVENT = "GameFightEvent";
-
+public class GameFight extends Observable {
     private final GameData gameData;
     private Enemy mEnemy = Enemy.NOBODY;
     private Fight mFight = Fight.NOFIGHT;
@@ -14,24 +10,28 @@ public class GameFight {
     private int mEnemyModifier = 0;
     private int mPlayerModifier = 0;
 
-    private ArrayList<PropertyChangeListener> listener = new ArrayList<PropertyChangeListener>();
-
     public GameFight(GameData gameData) {
         this.gameData = gameData;
     }
 
     protected void notifyIfFightStateChanged(Command cmd) {
-        boolean oldFightable = canFight();
-        cmd.execute();
-        boolean newFightable = canFight();
-        notifyListeners(this, FIGHTEVENT, oldFightable, newFightable);
+        if (cmd.execute()) {
+            triggerObservers();
+        }
+    }
+
+    private void triggerObservers() {
+        setChanged();
+        notifyObservers();
     }
 
     public void setEnemyMight(final int might) {
         notifyIfFightStateChanged(new Command() {
             @Override
-            public void execute() {
+            public boolean execute() {
+                boolean changed = (mEnemyMight != might);
                 mEnemyMight = might;
+                return changed;
             }
         });
     }
@@ -39,8 +39,10 @@ public class GameFight {
     public void setEnemyModifier(final int modifier) {
         notifyIfFightStateChanged(new Command() {
             @Override
-            public void execute() {
+            public boolean execute() {
+                boolean changed = (mEnemyModifier != modifier);
                 mEnemyModifier = modifier;
+                return changed;
             }
         });
     }
@@ -48,8 +50,10 @@ public class GameFight {
     public void setPlayerModifier(final int modifier) {
         notifyIfFightStateChanged(new Command() {
             @Override
-            public void execute() {
+            public boolean execute() {
+                boolean changed = (mPlayerModifier != modifier);
                 mPlayerModifier = modifier;
+                return changed;
             }
         });
     }
@@ -98,22 +102,19 @@ public class GameFight {
         return won;
     }
 
-    private void notifyListeners(Object object, String property, boolean oldValue, boolean newValue) {
-        for (PropertyChangeListener name : listener) {
-            name.propertyChange(new PropertyChangeEvent(object, property, oldValue, newValue));
-        }
-    }
-
-    public void addChangeListener(PropertyChangeListener newListener) {
-        listener.add(newListener);
-    }
-
     public Enemy getEnemy() {
         return mEnemy;
     }
 
-    public void setEnemy(Enemy enemy) {
-        mEnemy = enemy;
+    public void setEnemy(final Enemy enemy) {
+        notifyIfFightStateChanged(new Command() {
+            @Override
+            public boolean execute() {
+                boolean changed = (mEnemy != enemy);
+                mEnemy = enemy;
+                return changed;
+            }
+        });
     }
 
     public int getEnemyBonusValue() {
@@ -143,8 +144,10 @@ public class GameFight {
     public void setFight(final Fight fight) {
         notifyIfFightStateChanged(new Command() {
             @Override
-            public void execute() {
+            public boolean execute() {
+                boolean changed = (mFight != fight);
                 mFight = fight;
+                return changed;
             }
         });
     }
@@ -162,6 +165,6 @@ public class GameFight {
     }
 
     public interface Command {
-        void execute();
+        boolean execute();
     }
 }
