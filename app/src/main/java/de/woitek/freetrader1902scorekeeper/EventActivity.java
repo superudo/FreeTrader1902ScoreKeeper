@@ -46,10 +46,23 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
             case R.id.rgTheirStat:
                 switchTheirStat(i);
                 break;
+            case R.id.rgConstableFine:
+                switchConstableFine(i);
+                break;
+            case R.id.rgLawLevel:
+                switchLawLevel(i);
             default:
                 Log.d(CLASSID, String.format("Unknown RadioGroupId: %d", radioGroup.getId()));
                 break;
         }
+    }
+
+    private void switchLawLevel(int lawLevel) {
+
+    }
+
+    private void switchConstableFine(int fine) {
+
     }
 
     private void switchTheirStat(int selectedButtonIndex) {
@@ -165,6 +178,8 @@ public class EventActivity extends Activity implements RadioGroup.OnCheckedChang
         ((RadioGroup) findViewById(R.id.rgTask)).setOnCheckedChangeListener(this);
         ((RadioGroup) findViewById(R.id.rgYourStat)).setOnCheckedChangeListener(this);
         ((RadioGroup) findViewById(R.id.rgTheirStat)).setOnCheckedChangeListener(this);
+        ((RadioGroup) findViewById(R.id.rgLawLevel)).setOnCheckedChangeListener(this);
+        ((RadioGroup) findViewById(R.id.rgConstableFine)).setOnCheckedChangeListener(this);
 
         gameFight.addObserver(this);
     }
