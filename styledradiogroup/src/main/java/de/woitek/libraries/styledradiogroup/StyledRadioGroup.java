@@ -17,12 +17,11 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 public class StyledRadioGroup extends RadioGroup {
 	private String mDisplay[] = new String[]{"1", "2"};
 	private String mValues[] = null;
-	private eDirection mDirection;
 
-	public StyledRadioGroup(Context context) {
-		super(context);
-		init(null, 0);
-	}
+    public StyledRadioGroup(Context context) {
+        super(context);
+        init(null, 0);
+    }
 
 	public StyledRadioGroup(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -53,11 +52,11 @@ public class StyledRadioGroup extends RadioGroup {
 			initialSelect = a.getBoolean(R.styleable.StyledRadioGroup_selected, true);
 		}
 
-		mDirection = eDirection.VERTICAL;
-		if (a.hasValue(a.getInteger(R.styleable.StyledRadioGroup_layout, 0))) {
-			int nDirection = a.getInteger(R.styleable.StyledRadioGroup_layout, 0);
-			mDirection = (nDirection == 0)
-					? eDirection.HORIZONTAL
+        eDirection mDirection = eDirection.VERTICAL;
+        if (a.hasValue(a.getInteger(R.styleable.StyledRadioGroup_layout, 0))) {
+            int nDirection = a.getInteger(R.styleable.StyledRadioGroup_layout, 0);
+            mDirection = (nDirection == 0)
+                    ? eDirection.HORIZONTAL
 					: eDirection.VERTICAL;
 		}
 

@@ -1,13 +1,21 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
-/**
- * Created by Udo.Woitek on 06.10.2014.
- */
-public interface GameEvent {
-	public abstract EventType getEventType();
+import java.util.Observable;
 
-	public enum EventType {
-		FIGHT,
-		CARGOCHECK
-	}
+public abstract class GameEvent extends Observable {
+    protected GameData gameData = null;
+
+    void setGameData(GameData gameData) {
+        this.gameData = gameData;
+    }
+
+    public EventType getEventType() {
+        return EventType.NONE;
+    }
+
+    public enum EventType {
+        FIGHT,
+        CARGOCHECK,
+        NONE
+    }
 }

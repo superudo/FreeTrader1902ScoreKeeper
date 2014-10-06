@@ -1,8 +1,7 @@
-<ScrollView
-    android:id="@+id/llPolice"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cust="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llPolice"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -28,14 +27,14 @@
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
             android:text="CAUGHT WITH ILLEGAL GOODS."
-            android:textSize="36dp"/>
+            android:textSize="36dp" />
 
         <TextView
             android:id="@+id/lblPoliceRule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:text='The Constable will fine you. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.'/>
+            android:text='The Constable will fine you if you have any illegal goods at your truck. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.' />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -53,12 +52,12 @@
                 android:orientation="vertical">
 
                 <view
-                    android:id="@+id/view"
+                    android:id="@+id/lblConstableFine"
                     class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CONSTABLE FINE"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
 
                 <view
                     android:id="@+id/rgConstableFine"
@@ -66,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    cust:display="1;2;3"/>
+                    cust:display="1;2;3" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,12 +76,12 @@
                 android:orientation="vertical">
 
                 <view
-                    android:id="@+id/view2"
+                    android:id="@+id/lblLawLevel"
                     class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="LAW LEVEL"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
 
                 <view
                     android:id="@+id/rgLawLevel"
@@ -90,15 +89,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    cust:display="0;1;2;3"/>
+                    cust:display="0;1;2;3" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llYouPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/line_space"
+            android:background="@drawable/rounded_edge_field"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <view
+                android:id="@+id/lblYouPay"
+                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You pay"
+                android:textSize="24dp" />
+
+            <view
+                android:id="@+id/tYouPay"
+                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="0"
+                android:textSize="42dp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/lblPoliceOutcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="You have to pay $ X. If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over."/>
+            android:layout_marginTop="@dimen/line_space"
+            android:text="If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over." />
     </LinearLayout>
 </ScrollView>
