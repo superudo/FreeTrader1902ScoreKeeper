@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:cust="http://schemas.android.com/apk/res-auto"
-              android:layout_width="wrap_content"
-              android:layout_height="match_parent"
-              android:background="@color/background_color"
-              android:gravity="center_horizontal"
-              android:orientation="vertical"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin">
+    xmlns:cust="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
-        android:id="@+id/tEquipmentTitle"
+        android:id="@+id/tCargoTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:background="@color/blue"
         android:gravity="center"
         android:padding="5dp"
-        android:text="EQUIPMENT"
+        android:text="EVENT"
         android:textColor="@android:color/white"
         android:textSize="40sp"
         cust:fontFaceName="@string/western_font_name" />
@@ -28,32 +28,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="ACTION"
+        android:text="SELECT EVENT TYPE"
         android:textSize="20dp"
         cust:fontFaceName="@string/western_font_name" />
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
-        android:id="@+id/rbAction"
+        android:id="@+id/rgEnemy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="Buy;Sell;Drop" />
-
-    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
-        android:id="@+id/lblYourTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="AMOUNT"
-        android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
-
-    <de.woitek.libraries.styledradiogroup.StyledRadioGroup
-        android:id="@+id/rbAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        cust:display="1;2;3;4;5" />
+        cust:display="HIGHWAYMAN x1;HIGHWAYMAN x2;HIGHWAYMAN x3;BEAR;CONSTABLE"
+        cust:layout="vertical"
+        cust:selected="false"
+     />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -71,8 +58,7 @@
             android:layout_height="wrap_content"
             android:background="@color/blue_transparent"
             android:minWidth="110dp"
-            android:text="Do it!"
-            />
+            android:text="Do it!" />
 
         <Button
             android:id="@+id/bnCancel"
@@ -81,8 +67,7 @@
             android:layout_marginLeft="7dp"
             android:background="@color/blue_transparent"
             android:minWidth="110dp"
-            android:text="Forget it"
-            />
+            android:text="Forget it" />
 
     </LinearLayout>
 

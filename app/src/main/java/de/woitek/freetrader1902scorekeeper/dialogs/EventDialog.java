@@ -1,0 +1,92 @@
+package de.woitek.freetrader1902scorekeeper.dialogs;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+
+import de.woitek.freetrader1902scorekeeper.ConstableActivity;
+import de.woitek.freetrader1902scorekeeper.FightActivity;
+import de.woitek.freetrader1902scorekeeper.R;
+import de.woitek.freetrader1902scorekeeper.types.GameData;
+import de.woitek.freetrader1902scorekeeper.types.GameEvent;
+import de.woitek.freetrader1902scorekeeper.types.GameFight;
+import de.woitek.freetrader1902scorekeeper.types.GamePolice;
+import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
+
+public class EventDialog extends Dialog {
+	private Activity activity;
+	private GameData gameData;
+
+	private StyledRadioGroup rgEnemy;
+
+	public EventDialog(Activity a, GameData gameData) {
+		super(a);
+		this.gameData = gameData;
+		this.activity = a;
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.dialog_event);
+		init();
+	}
+
+	private void init() {
+		gameData.clearCurrentEvent();
+		rgEnemy = (StyledRadioGroup) findViewById(R.id.rgEnemy);
+		findViewById(R.id.bnOk).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				GameEvent event = null;
+				GameFight fight = null;
+				GamePolice police = null;
+				Intent eventIntent = null;
+
+				int selected = rgEnemy.getSelectedIndex();
+				switch (selected) {
+					case 0:
+						event = new GameFight(gameData, GameFight.Enemy.HIGHWAYMAN, 1);
+						eventIntent = new Intent(getContext(), GameFight.class);
+						break;
+					case 1:
+						event = new GameFight(gameData, GameFight.Enemy.HIGHWAYMAN, 2);
+						eventIntent = new Intent(getContext(), FightActivity.class);
+						break;
+					case 2:
+						event = new GameFight(gameData, GameFight.Enemy.HIGHWAYMAN, 3);
+						eventIntent = new Intent(getContext(), FightActivity.class);
+						break;
+					case 3:
+						event = new GameFight(gameData, GameFight.Enemy.BEAR, 2);
+						eventIntent = new Intent(getContext(), FightActivity.class);
+						break;
+					case 4:
+						event = new GamePolice(gameData);
+						eventIntent = new Intent(getContext(), ConstableActivity.class);
+						break;
+					default:
+						event = null;
+						break;
+				}
+
+				gameData.setCurrentEvent(event);
+				if (eventIntent != null) {
+					eventIntent.putExtra(GameData.CLASSNAME, gameData);
+					getContext().startActivity(eventIntent);
+				}
+				dismiss();
+			}
+		});
+		findViewById(R.id.bnCancel).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+	}
+}

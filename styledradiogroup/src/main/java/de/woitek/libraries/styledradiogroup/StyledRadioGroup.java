@@ -54,8 +54,8 @@ public class StyledRadioGroup extends RadioGroup {
 		}
 
 		mDirection = eDirection.VERTICAL;
-		if (a.hasValue(a.getInteger(R.styleable.StyledRadioGroup_direction, 0))) {
-			int nDirection = a.getInteger(R.styleable.StyledRadioGroup_direction, 0);
+		if (a.hasValue(a.getInteger(R.styleable.StyledRadioGroup_layout, 0))) {
+			int nDirection = a.getInteger(R.styleable.StyledRadioGroup_layout, 0);
 			mDirection = (nDirection == 0)
 					? eDirection.HORIZONTAL
 					: eDirection.VERTICAL;

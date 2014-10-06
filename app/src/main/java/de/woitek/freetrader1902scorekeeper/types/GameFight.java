@@ -2,7 +2,7 @@ package de.woitek.freetrader1902scorekeeper.types;
 
 import java.util.Observable;
 
-public class GameFight extends Observable {
+public class GameFight extends Observable implements GameEvent {
     private final GameData gameData;
     private Enemy mEnemy = Enemy.NOBODY;
     private Fight mFight = Fight.NOFIGHT;
@@ -13,6 +13,12 @@ public class GameFight extends Observable {
     public GameFight(GameData gameData) {
         this.gameData = gameData;
     }
+
+	public GameFight(GameData gameData, Enemy enemy, int enemyMight) {
+		this.gameData = gameData;
+		this.mEnemy = enemy;
+		this.mEnemyMight = (mEnemy == Enemy.BEAR)? 2: enemyMight;
+	}
 
     protected void notifyIfFightStateChanged(Command cmd) {
         if (cmd.execute()) {
@@ -148,10 +154,15 @@ public class GameFight extends Observable {
         });
     }
 
-    public enum Enemy {
+	@Override
+	public EventType getEventType() {
+		return EventType.FIGHT;
+	}
+
+	public enum Enemy {
         BEAR,
         HIGHWAYMAN,
-        NOBODY
+	    CONSTABLE, NOBODY
     }
 
     public enum Fight {

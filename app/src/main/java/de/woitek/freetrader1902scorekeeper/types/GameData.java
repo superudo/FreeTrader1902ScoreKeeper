@@ -38,13 +38,18 @@ public class GameData implements Parcelable {
             return new GameData[size];
         }
     };
-    private HashMap<String, RangedInteger> equipment = null;
-    private HashMap<String, RangedInteger> cargo = null;
-	private HashMap<String, Integer> equipmentPrice = null;
-	private int[] monthlyRate;
-	private int gameState;
+
+    private HashMap<String, RangedInteger> mEquipment = null;
+    private HashMap<String, RangedInteger> mCargo = null;
 	private RangedInteger month;
 	private RangedInteger money;
+
+	private HashMap<String, Integer> equipmentPrice = null;
+	private int[] monthlyRate;
+
+	private int gameState;
+	private GameEvent currentEvent;
+
 	private ArrayList<PropertyChangeListener> listener;
 
     public GameData() {
@@ -69,27 +74,27 @@ public class GameData implements Parcelable {
     }
 
     public void InitGameData() {
-        if (equipment == null) {
-            equipment = new HashMap<String, RangedInteger>(4);
+        if (mEquipment == null) {
+            mEquipment = new HashMap<String, RangedInteger>(4);
         }
         if (equipmentPrice == null) {
             equipmentPrice = new HashMap<String, Integer>(4);
         }
-        if (cargo == null) {
-            cargo = new HashMap<String, RangedInteger>(4);
+        if (mCargo == null) {
+            mCargo = new HashMap<String, RangedInteger>(4);
         }
 
-        equipment.clear();
-        equipment.put(CARGO, new RangedInteger(0, 5, 3));
-        equipment.put(ENGINE, new RangedInteger(0, 5, 3));
-        equipment.put(ARMOR, new RangedInteger(0, 5, 2));
-        equipment.put(SHOTGUNS, new RangedInteger(0, 5, 2));
+        mEquipment.clear();
+        mEquipment.put(CARGO, new RangedInteger(0, 5, 3));
+        mEquipment.put(ENGINE, new RangedInteger(0, 5, 3));
+        mEquipment.put(ARMOR, new RangedInteger(0, 5, 2));
+        mEquipment.put(SHOTGUNS, new RangedInteger(0, 5, 2));
 
-        cargo.clear();
-        cargo.put(PRODUCE, new RangedInteger(0, 5, 0));
-        cargo.put(MUNITIONS, new RangedInteger(0, 5, 0));
-        cargo.put(TEXTILES, new RangedInteger(0, 5, 0));
-        cargo.put(MOONSHINE, new RangedInteger(0, 5, 0));
+        mCargo.clear();
+        mCargo.put(PRODUCE, new RangedInteger(0, 5, 0));
+        mCargo.put(MUNITIONS, new RangedInteger(0, 5, 0));
+        mCargo.put(TEXTILES, new RangedInteger(0, 5, 0));
+        mCargo.put(MOONSHINE, new RangedInteger(0, 5, 0));
 
         equipmentPrice.clear();
         equipmentPrice.put(CARGO, 5);
@@ -106,7 +111,7 @@ public class GameData implements Parcelable {
     }
 
     protected boolean CargoOk(int oldValue, int newValue) {
-        return (getCurrentCargoAmount() - oldValue + newValue <= equipment.get(CARGO).getValue());
+        return (getCurrentCargoAmount() - oldValue + newValue <= mEquipment.get(CARGO).getValue());
     }
 
     private boolean IsDifferent(int oldValue, int newValue) {
@@ -114,17 +119,17 @@ public class GameData implements Parcelable {
     }
 
     public int getEquipment(String type) {
-        if (equipment.containsKey(type)) {
-            return equipment.get(type).getValue();
+        if (mEquipment.containsKey(type)) {
+            return mEquipment.get(type).getValue();
         }
         throw new IllegalArgumentException(type + " is no valid equipment key.");
     }
 
     protected void setEquipment(String type, int value) {
-        if (equipment.containsKey(type)) {
-            int oldValue = equipment.get(type).getValue();
+        if (mEquipment.containsKey(type)) {
+            int oldValue = mEquipment.get(type).getValue();
             if (IsDifferent(oldValue, value)) {
-                equipment.get(type).setValue(value);
+                mEquipment.get(type).setValue(value);
                 notifyListeners(this, type, oldValue, value);
             }
         } else {
@@ -133,17 +138,17 @@ public class GameData implements Parcelable {
 	}
 
     public Integer getCargo(String type) {
-        if (cargo.containsKey(type)) {
-            return cargo.get(type).getValue();
+        if (mCargo.containsKey(type)) {
+            return mCargo.get(type).getValue();
         }
         throw new IllegalArgumentException(type + " is no valid cargo key.");
     }
 
     protected void setCargo(String type, int value) {
-        if (cargo.containsKey(type)) {
-            int oldValue = cargo.get(type).getValue();
+        if (mCargo.containsKey(type)) {
+            int oldValue = mCargo.get(type).getValue();
             if (IsDifferent(oldValue, value) && CargoOk(oldValue, value)) {
-                cargo.get(type).setValue(value);
+                mCargo.get(type).setValue(value);
                 notifyListeners(this, type, oldValue, value);
             }
         } else {
@@ -163,7 +168,7 @@ public class GameData implements Parcelable {
     */
     public int getCurrentCargoAmount() {
         int sum = 0;
-        for (RangedInteger i : cargo.values()) {
+        for (RangedInteger i : mCargo.values()) {
             sum += i.getValue();
         }
         return sum;
@@ -194,11 +199,11 @@ public class GameData implements Parcelable {
     }
 
     public boolean mayBuyCargo(int amount, int price, String toBuy) {
-        return (amount > 0) && ((money.getValue() - amount * price) > 0) && CargoOk(cargo.get(toBuy).getValue(), amount);
+        return (amount > 0) && ((money.getValue() - amount * price) > 0) && CargoOk(mCargo.get(toBuy).getValue(), amount);
     }
 
     public boolean maySellCargo(int amount, String toSell) {
-        return (amount <= cargo.get(toSell).getValue());
+        return (amount <= mCargo.get(toSell).getValue());
     }
 
     public void buyCargo(int amount, int price, String toBuy) {
@@ -220,23 +225,23 @@ public class GameData implements Parcelable {
     }
 
     public boolean mayBuyEquipment(int amount, String toBuy) {
-        return (((amount * equipmentPrice.get(toBuy)) <= getMoney()) && ((equipment.get(toBuy).getValue() + amount) <= equipment.get(toBuy).getMax()));
+        return (((amount * equipmentPrice.get(toBuy)) <= getMoney()) && ((mEquipment.get(toBuy).getValue() + amount) <= mEquipment.get(toBuy).getMax()));
     }
 
     public void buyEquipment(int amount, String toBuy) {
         if (mayBuyEquipment(amount, toBuy)) {
-            setEquipment(toBuy, equipment.get(toBuy).getValue() + amount);
+            setEquipment(toBuy, mEquipment.get(toBuy).getValue() + amount);
             setMoney(getMoney() - amount * equipmentPrice.get(toBuy));
         }
     }
 
     public boolean maySellEquipment(int amount, String toSell) {
-        return (amount <= equipment.get(toSell).getValue());
+        return (amount <= mEquipment.get(toSell).getValue());
     }
 
     public void sellEquipment(int amount, String toSell) {
         if (maySellEquipment(amount, toSell)) {
-            setEquipment(toSell, equipment.get(toSell).getValue() - amount);
+            setEquipment(toSell, mEquipment.get(toSell).getValue() - amount);
             setMoney(getMoney() + amount * equipmentPrice.get(toSell));
         }
     }
@@ -247,7 +252,7 @@ public class GameData implements Parcelable {
 
     public void dropEquipment(int amount, String toDrop) {
         if (mayDropEquipment(amount, toDrop)) {
-            setEquipment(toDrop, equipment.get(toDrop).getValue() - amount);
+            setEquipment(toDrop, mEquipment.get(toDrop).getValue() - amount);
         }
     }
 
@@ -294,7 +299,7 @@ public class GameData implements Parcelable {
     }
 
 	public int getFreeCargoAmount() {
-		return equipment.get(CARGO).getValue() - getCurrentCargoAmount();
+		return mEquipment.get(CARGO).getValue() - getCurrentCargoAmount();
 	}
 
     @Override
@@ -314,4 +319,11 @@ public class GameData implements Parcelable {
         }
     }
 
+	public void clearCurrentEvent() {
+		currentEvent = null;
+	}
+
+	public void setCurrentEvent(GameEvent event) {
+		currentEvent = event;
+	}
 }

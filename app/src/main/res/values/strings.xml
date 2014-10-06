@@ -23,4 +23,8 @@
     <string name="western_font_name">cowboy_movie.ttf</string>
     <string name="western_font_name_2">smokum_regular.ttf</string>
     <string name="police_outcome_rule">You have to pay &lt;b>$ %d&lt;/b>. If you haven\'t the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over.</string>
+    <string name="title_activity_constable">Constable</string>
+    <string name="title_activity_highwayman">Highwayman</string>
+    <string name="title_activity_bear">Bear</string>
+
 </resources>

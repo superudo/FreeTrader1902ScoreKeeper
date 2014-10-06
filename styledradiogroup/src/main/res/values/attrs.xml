@@ -4,7 +4,7 @@
         <attr name="display" format="string" />
         <attr name="values" format="string" />
         <attr name="selected" format="boolean" />
-        <attr name="direction" format="enum">
+        <attr name="layout" format="enum">
             <enum name="horizontal" value="0"/>
             <enum name="vertical" value="1"/>
         </attr>

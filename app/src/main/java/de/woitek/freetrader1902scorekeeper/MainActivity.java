@@ -3,7 +3,6 @@ package de.woitek.freetrader1902scorekeeper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +16,7 @@ import java.beans.PropertyChangeListener;
 
 import de.woitek.freetrader1902scorekeeper.dialogs.CargoDialog;
 import de.woitek.freetrader1902scorekeeper.dialogs.EquipmentDialog;
+import de.woitek.freetrader1902scorekeeper.dialogs.EventDialog;
 import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.freetrader1902scorekeeper.views.BoxUIView;
 
@@ -237,12 +237,10 @@ public class MainActivity extends Activity
 					MoveToNextCity();
 					break;
 				case R.id.tEvent:
-                    Intent eventIntent = new Intent(this, EventActivity.class);
-                    eventIntent.putExtra("GameData", gameData);
-                    startActivity(eventIntent);
-                    finish();
-                    break;
-                default:
+					EventDialog dlg = new EventDialog(this, gameData);
+					dlg.show();
+					break;
+	            default:
                     break;
 			}
 		}

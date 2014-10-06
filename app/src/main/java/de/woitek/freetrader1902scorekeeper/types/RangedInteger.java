@@ -11,7 +11,7 @@ public class RangedInteger {
 		this.value = value;
 	}
 
-	protected Integer setValue(Integer v) {
+	public Integer setValue(Integer v) {
 		Integer oldValue = value;
 		v = Math.max(low, v);
 		v = Math.min(v, high);
@@ -19,27 +19,14 @@ public class RangedInteger {
 		return oldValue;
 	}
 
-	protected Integer getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
-	protected Integer incValue() {
+	public Integer incValue() {
 		return setValue(getValue() + 1);
 	}
 
-	/*
-		protected Integer incBy(Integer inc) {
-			return setValue(getValue() + inc);
-		}
-
-		protected Integer decValue() {
-			return setValue(getValue() - 1);
-		}
-
-		public Integer decBy(Integer dec) {
-			return setValue(getValue() + dec);
-		}
-	*/
 	public int getMax() {
 		return high;
 	}
