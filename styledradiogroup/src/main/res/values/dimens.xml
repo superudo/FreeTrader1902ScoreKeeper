@@ -4,4 +4,5 @@
     <dimen name="button_inner_radius">6dp</dimen>
     <dimen name="button_padding">8dp</dimen>
     <dimen name="button_horizontal_padding">14dp</dimen>
+    <dimen name="button_vertical_padding">14dp</dimen>
 </resources>

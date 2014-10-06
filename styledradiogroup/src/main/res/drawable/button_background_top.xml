@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape>
+            <corners android:topLeftRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+            <solid android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_horizontal_padding" android:left="@dimen/button_padding" android:right="@dimen/button_padding" android:top="@dimen/button_horizontal_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:topLeftRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+            <solid android:color="@color/button_blue_transparent"/>
+            <stroke android:width="2dp" android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_horizontal_padding" android:left="@dimen/button_padding" android:right="@dimen/button_padding" android:top="@dimen/button_horizontal_padding"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:topLeftRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+            <solid android:color="@color/button_light_gray"/>
+            <stroke android:width="2dp" android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_horizontal_padding" android:left="@dimen/button_padding" android:right="@dimen/button_padding" android:top="@dimen/button_horizontal_padding"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners android:topLeftRadius="@dimen/button_radius" android:topRightRadius="@dimen/button_radius"/>
+            <stroke android:width="2dp" android:color="@color/button_blue"/>
+            <padding android:bottom="@dimen/button_horizontal_padding" android:left="@dimen/button_padding" android:right="@dimen/button_padding" android:top="@dimen/button_horizontal_padding"/>
+            <solid android:color="@android:color/white"/>
+        </shape>
+    </item>
+</selector>
