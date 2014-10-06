@@ -2,14 +2,8 @@ package de.woitek.libraries.flexiblefonttextview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
 public class FlexibleFontTextView extends TextView {
@@ -32,6 +26,8 @@ public class FlexibleFontTextView extends TextView {
 	}
 
 	private void init(AttributeSet attrs, int defStyle) {
+		setText(getText().toString().toUpperCase());
+
 		// Load attributes
 		final TypedArray a = getContext().obtainStyledAttributes(
 				attrs, R.styleable.FlexibleFontTextView, defStyle, 0);

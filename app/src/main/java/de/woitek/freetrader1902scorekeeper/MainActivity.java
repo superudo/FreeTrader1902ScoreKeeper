@@ -23,7 +23,7 @@ import de.woitek.freetrader1902scorekeeper.views.BoxUIView;
 public class MainActivity extends Activity
 		implements PropertyChangeListener, View.OnClickListener {
 
-    private GameData gameData;
+	private GameData gameData;
 
 	private TextView vGold;
 
@@ -39,14 +39,14 @@ public class MainActivity extends Activity
 
 	private BoxUIView bMonth;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
-        if (gameData == null) {
-            gameData = new GameData();
-        }
+		gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
+		if (gameData == null) {
+			gameData = new GameData();
+		}
 
 		setContentView(R.layout.activity_main);
 
@@ -202,10 +202,10 @@ public class MainActivity extends Activity
 		}
 	}
 
-    @Override
-    public void onClick(View view) {
-        if (!gameData.gameFinished()) {
-            switch (view.getId()) {
+	@Override
+	public void onClick(View view) {
+		if (!gameData.gameFinished()) {
+			switch (view.getId()) {
 				case R.id.rowProduce:
 					new CargoDialog(this, gameData, GameData.PRODUCE).show();
 					break;
@@ -240,8 +240,8 @@ public class MainActivity extends Activity
 					EventDialog dlg = new EventDialog(this, gameData);
 					dlg.show();
 					break;
-	            default:
-                    break;
+				default:
+					break;
 			}
 		}
 	}

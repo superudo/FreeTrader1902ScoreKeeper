@@ -21,7 +21,7 @@
         android:text="EQUIPMENT"
         android:textColor="@android:color/white"
         android:textSize="40sp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAction"
@@ -30,30 +30,14 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="ACTION"
         android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/rbAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="Buy;Sell;Drop" />
-
-    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
-        android:id="@+id/lblYourTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="AMOUNT"
-        android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
-
-    <de.woitek.libraries.styledradiogroup.StyledRadioGroup
-        android:id="@+id/rbAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        cust:display="1;2;3;4;5" />
+        cust:display="Buy;Sell;Drop"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

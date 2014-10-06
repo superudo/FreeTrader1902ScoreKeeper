@@ -1,16 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cust="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/background_color"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="de.woitek.freetrader1902scorekeeper.EventActivity">
+              xmlns:cust="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/background_color"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="de.woitek.freetrader1902scorekeeper.EventActivity">
 
     <view
         android:id="@+id/rgAction"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         cust:display="Bandit;Bear;Police"
-        cust:selected="false" />
+        cust:selected="false"/>
 
     <ViewSwitcher
         android:id="@+id/viewSwitcher"
@@ -33,11 +33,11 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            view
+                view
                 android:id="@+id/lblPolice"
                 class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                 android:layout_width="wrap_content"
@@ -54,14 +54,14 @@
                     android:layout_marginTop="16dp"
                     android:gravity="center_horizontal"
                     android:text="CAUGHT WITH ILLEGAL GOODS."
-                    android:textSize="36dp" />
+                    android:textSize="36dp"/>
 
                 <TextView
                     android:id="@+id/lblPoliceRule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    android:text='The Constable will fine you. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.' />
+                    android:text='The Constable will fine you. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.'/>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -83,7 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="CONSTABLE FINE"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"/>
 
                         <view
                             android:id="@+id/rgConstableFine"
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="LAW LEVEL"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"/>
 
                         <view
                             android:id="@+id/rgLawLevel"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="You have to pay $ X. If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over." />
+                    android:text="You have to pay $ X. If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over."/>
             </LinearLayout>
         </ScrollView>
 
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     cust:display="x1;x2;x3"
-                    cust:selected="false" />
+                    cust:selected="false"/>
 
                 <view
                     android:id="@+id/lblYourTask"
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="YOUR TASK"
-                    android:textSize="30dp" />
+                    android:textSize="30dp"/>
 
                 <view
                     android:id="@+id/rgTask"
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     cust:display="Defense;Attack"
-                    cust:selected="false" />
+                    cust:selected="false"/>
 
                 <TableLayout
                     android:layout_width="fill_parent"
@@ -183,7 +183,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="YOUR STATS"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"/>
 
                         <view
                             android:id="@+id/lblTheirStats"
@@ -193,7 +193,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="THEIR STATS"
-                            android:textSize="20dp" />
+                            android:textSize="20dp"/>
                     </TableRow>
 
                     <TableRow
@@ -208,7 +208,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="ARMOR / SHOTGUNS"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"/>
 
                         <TextView
                             android:id="@+id/lblTheirBonus"
@@ -217,7 +217,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="MONTH BONUS"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"/>
                     </TableRow>
 
                     <TableRow
@@ -232,7 +232,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="MODIFIER"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"/>
 
                         <TextView
                             android:id="@+id/lblTheirStateType"
@@ -241,7 +241,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:text="MODIFIER"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"/>
                     </TableRow>
 
                     <TableRow
@@ -257,7 +257,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             cust:display="1;2;3"
-                            cust:selected="false" />
+                            cust:selected="false"/>
 
                         <view
                             android:id="@+id/rgTheirStat"
@@ -267,7 +267,7 @@
                             android:layout_weight="1"
                             android:gravity="center_horizontal"
                             cust:display="1;2;3"
-                            cust:selected="false" />
+                            cust:selected="false"/>
                     </TableRow>
 
                     <TableRow
@@ -293,7 +293,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="YOUR"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"/>
 
                             <view
                                 android:id="@+id/tYourFinalStat"
@@ -302,7 +302,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="0"
-                                android:textSize="40dp" />
+                                android:textSize="40dp"/>
 
                         </LinearLayout>
 
@@ -324,7 +324,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="THEIRS"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"/>
 
                             <view
                                 android:id="@+id/tTheirFinalStat"
@@ -333,7 +333,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:text="0"
-                                android:textSize="40dp" />
+                                android:textSize="40dp"/>
 
                         </LinearLayout>
                     </TableRow>
@@ -346,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:text="SELECT TASK AND MODIFIERS"
-                    android:textSize="30dp" />
+                    android:textSize="30dp"/>
 
                 <TextView
                     android:id="@+id/lblRules"
@@ -355,7 +355,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
                     android:text="You can fight back or try to get away with your truck."
-                    android:textSize="14dp" />
+                    android:textSize="14dp"/>
 
             </LinearLayout>
         </ScrollView>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cust="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@color/background_color"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+              xmlns:cust="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:background="@color/background_color"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin">
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/tCargoTitle"
@@ -18,10 +18,10 @@
         android:background="@color/blue"
         android:gravity="center"
         android:padding="5dp"
-        android:text="CARGO"
+        android:text="Cargo"
         android:textColor="@android:color/white"
         android:textSize="40sp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAction"
@@ -30,14 +30,14 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="ACTION"
         android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/rbAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="Buy;Sell;Drop" />
+        cust:display="Buy;Sell;Drop"/>
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblYourTask"
@@ -46,14 +46,14 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="AMOUNT"
         android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/rbAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="1;2;3;4;5" />
+        cust:display="1;2;3;4;5"/>
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblPrice"
@@ -62,14 +62,14 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="PRICE"
         android:textSize="20dp"
-        cust:fontFaceName="@string/western_font_name" />
+        cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/rbPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="1;2;3;4;5" />
+        cust:display="1;2;3;4;5"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:background="@color/blue_transparent"
             android:minWidth="110dp"
-            android:text="Do it!" />
+            android:text="Do it!"/>
 
         <Button
             android:id="@+id/bnCancel"
@@ -96,7 +96,7 @@
             android:layout_marginLeft="7dp"
             android:background="@color/blue_transparent"
             android:minWidth="110dp"
-            android:text="Forget it" />
+            android:text="Forget it"/>
 
     </LinearLayout>
 
