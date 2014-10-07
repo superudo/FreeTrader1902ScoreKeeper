@@ -9,13 +9,14 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import de.woitek.freetrader1902scorekeeper.dialogs.SellEquipmentDialog;
 import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.freetrader1902scorekeeper.types.GameEvent;
 import de.woitek.freetrader1902scorekeeper.types.GameEventPolice;
 import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
 
 
-public class ConstableActivity extends Activity {
+public class ConstableActivity extends Activity implements View.OnClickListener {
     private GameData gameData;
 
     private StyledRadioGroup rgFine;
@@ -73,16 +74,12 @@ public class ConstableActivity extends Activity {
 		    public void onClick(View v) {
 			    v.setEnabled(false);
 			    gameData.setMoney(gameData.getMoney() - ((GameEventPolice) gameData.getCurrentEvent()).whatToPay());
-			    gotoMainActivity();
-		    }
+                gameData.dropCargo(gameData.getCargo(GameData.MOONSHINE), GameData.MOONSHINE);
+                gotoMainActivity();
+            }
 	    });
 
-	    findViewById(R.id.bnSell).setOnClickListener(new View.OnClickListener() {
-		    @Override
-		    public void onClick(View v) {
-
-		    }
-	    });
+        findViewById(R.id.bnSell).setOnClickListener(this);
 
         updateUI();
     }
@@ -114,9 +111,9 @@ public class ConstableActivity extends Activity {
         ((TextView) findViewById(R.id.lblPoliceTitle)).setText(title);
     }
 
-	private void enablePayButtons() {
-		GameEventPolice event = (GameEventPolice) gameData.getCurrentEvent();
-		boolean enoughMoney = gameData.getMoney() > event.whatToPay() + 1;
+    public void enablePayButtons() {
+        GameEventPolice event = (GameEventPolice) gameData.getCurrentEvent();
+        boolean enoughMoney = gameData.getMoney() > event.whatToPay() + 1;
 		findViewById(R.id.bnPay).setEnabled(enoughMoney);
 		findViewById(R.id.bnSell).setEnabled(!enoughMoney);
 	}
@@ -145,5 +142,10 @@ public class ConstableActivity extends Activity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        new SellEquipmentDialog(this, gameData).show();
     }
 }

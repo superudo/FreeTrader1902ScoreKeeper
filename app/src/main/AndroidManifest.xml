@@ -9,7 +9,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -17,16 +19,22 @@
         </activity>
         <activity
             android:name=".EventActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_event"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".ConstableActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_constable"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".FightActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_highwayman"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>
