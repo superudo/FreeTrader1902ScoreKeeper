@@ -147,18 +147,14 @@
                 android:layout_marginTop="18dp">
 
                 <LinearLayout
+                    style="@style/NumberOutputText"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_edge_field"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_weight="1">
 
-                    <view
+                <view
                         android:id="@+id/lblYourFinalStat"
                         class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                         android:layout_width="wrap_content"
@@ -178,18 +174,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/NumberOutputText"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_edge_field"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:layout_weight="1">
 
-                    <view
+                <view
                         android:id="@+id/lblTheirFinalStat"
                         class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                         android:layout_width="wrap_content"
