@@ -61,30 +61,69 @@ public class ConstableActivity extends Activity {
         rgLawLevel.setSelectedIndex(0);
         ((GameEventPolice) gameData.getCurrentEvent()).setLawLevel(0);
 
+	    findViewById(R.id.bnProceed).setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    gotoMainActivity();
+		    }
+	    });
+
+	    findViewById(R.id.bnPay).setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    v.setEnabled(false);
+			    gameData.setMoney(gameData.getMoney() - ((GameEventPolice) gameData.getCurrentEvent()).whatToPay());
+			    gotoMainActivity();
+		    }
+	    });
+
+	    findViewById(R.id.bnSell).setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+
+		    }
+	    });
+
         updateUI();
     }
 
-    private void updateUI() {
-        GameEventPolice event = (GameEventPolice) gameData.getCurrentEvent();
+	private void gotoMainActivity() {
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra(GameData.CLASSNAME, gameData);
+		startActivity(intent);
+		finish();
+	}
+
+	private void updateUI() {
+		GameEventPolice event = (GameEventPolice) gameData.getCurrentEvent();
         String outcome, title;
         if (event.caughtInTheAct()) {
             outcome = getResources().getString(R.string.police_outcome_rule);
             ((TextView) findViewById(R.id.tYouPay)).setText(String.format("$ %d", event.whatToPay()));
             title = "Caught with illegal goods.";
+	        findViewById(R.id.bnProceed).setVisibility(View.GONE);
+	        enablePayButtons();
         } else {
             title = "Ok. You are clean.";
             outcome = "You may go now. But I'll keep an eye on you, pal...";
-            for (int i : new int[]{R.id.lblConstableFine, R.id.lblLawLevel, R.id.lblPoliceRule, R.id.rgLawLevel, R.id.rgConstableFine, R.id.lblYouPay, R.id.tYouPay, R.id.llYouPay}) {
-                findViewById(i).setVisibility(View.GONE);
+	        for (int i : new int[]{R.id.lblConstableFine, R.id.lblLawLevel, R.id.lblPoliceRule, R.id.rgLawLevel, R.id.rgConstableFine, R.id.lblYouPay, R.id.tYouPay, R.id.llYouPay, R.id.llPayButtons}) {
+		        findViewById(i).setVisibility(View.GONE);
             }
         }
         ((TextView) findViewById(R.id.lblPoliceOutcome)).setText(outcome);
         ((TextView) findViewById(R.id.lblPoliceTitle)).setText(title);
     }
 
+	private void enablePayButtons() {
+		GameEventPolice event = (GameEventPolice) gameData.getCurrentEvent();
+		boolean enoughMoney = gameData.getMoney() > event.whatToPay() + 1;
+		findViewById(R.id.bnPay).setEnabled(enoughMoney);
+		findViewById(R.id.bnSell).setEnabled(!enoughMoney);
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.constable, menu);
         return true;

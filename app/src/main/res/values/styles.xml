@@ -11,4 +11,9 @@
         <item name="android:orientation">vertical</item>
         <item name="android:padding">14dp</item>
     </style>
+
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:layout_margin">7dp</item>
+    </style>
 </resources>
