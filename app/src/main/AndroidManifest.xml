@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.woitek.freetrader1902scorekeeper">
+<manifest
+    package="de.woitek.freetrader1902scorekeeper"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -13,28 +14,22 @@
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".EventActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/title_activity_event"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".ConstableActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_constable"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="sensorPortrait" />
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".FightActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_highwayman"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="sensorPortrait" />
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>
