@@ -111,17 +111,19 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="7dp"
             android:minWidth="110dp"
-            android:text="Sell it!"/>
+            android:text="Sell it!" />
 
         <Button
             android:id="@+id/bnCancel"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="7dp"
             android:layout_marginLeft="7dp"
             android:minWidth="110dp"
-            android:text="No way!"/>
+            android:text="No way!" />
 
     </LinearLayout>
 

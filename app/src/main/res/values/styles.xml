@@ -5,7 +5,7 @@
     </style>
 
     <style name="NumberOutputField">
-    <item name="android:layout_gravity">center</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:background">@drawable/rounded_edge_field</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">vertical</item>
@@ -25,6 +25,5 @@
 
     <style name="ButtonStyle">
         <item name="android:background">@drawable/button</item>
-        <item name="android:layout_margin">7dp</item>
     </style>
 </resources>

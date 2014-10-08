@@ -1,14 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:cust="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="fill_parent"
-              android:background="@color/background_color"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-    >
+    xmlns:cust="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_color"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <ScrollView
         android:id="@+id/llPolice"
@@ -32,14 +31,14 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:text="CAUGHT WITH ILLEGAL GOODS."
-                android:textSize="36dp"/>
+                android:textSize="36dp" />
 
             <TextView
                 android:id="@+id/lblPoliceRule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text='The Constable will fine you if you have any illegal goods at your truck. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.'/>
+                android:text='The Constable will fine you if you have any illegal goods at your truck. Draw a new event card. The "Fine" value is multiplied by the Law Level of your target city. The result is the number of Gold Coins you must give up as the Fine.' />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -62,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CONSTABLE FINE"
-                        android:textSize="20dp"/>
+                        android:textSize="20dp" />
 
                     <view
                         android:id="@+id/rgConstableFine"
@@ -70,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        cust:display="1;2;3"/>
+                        cust:display="1;2;3" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -86,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LAW LEVEL"
-                        android:textSize="20dp"/>
+                        android:textSize="20dp" />
 
                     <view
                         android:id="@+id/rgLawLevel"
@@ -94,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        cust:display="0;1;2;3"/>
+                        cust:display="0;1;2;3" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -106,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/line_space"
                 android:text="You have to pay"
-                android:textSize="30dp"/>
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/lblPoliceOutcome"
@@ -114,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/line_space"
                 android:layout_marginTop="@dimen/line_space"
-                android:text="If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over."/>
+                android:text="If you haven't the gold you may sell parts of your truck for half the price you paid to buy it (rounded down). If you are unable to pay the fine, then you are arrested and the game is over." />
 
             <LinearLayout
                 android:id="@+id/llPayButtons"
@@ -128,16 +127,18 @@
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:minWidth="150dp"
-                    android:text="Pay fine"/>
+                    android:text="Pay fine" />
 
                 <Button
                     android:id="@+id/bnSell"
                     style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:minWidth="150dp"
-                    android:text="Sell equipment"/>
+                    android:text="Sell equipment" />
 
             </LinearLayout>
 
@@ -146,9 +147,9 @@
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:minWidth="150dp"
-                android:text="Go to next city"
-                />
+                android:text="Go to next city" />
 
         </LinearLayout>
     </ScrollView>
