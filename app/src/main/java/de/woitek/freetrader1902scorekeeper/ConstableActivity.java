@@ -108,7 +108,7 @@ public class ConstableActivity extends Activity implements View.OnClickListener 
     }
 
     public void enablePayButtons() {
-        boolean enoughMoney = gameData.getMoney() > event.whatToPay() + 1;
+	    boolean enoughMoney = gameData.getMoney() - 1 >= event.whatToPay();
 		findViewById(R.id.bnPay).setEnabled(enoughMoney);
 		findViewById(R.id.bnSell).setEnabled(!enoughMoney);
 	}
