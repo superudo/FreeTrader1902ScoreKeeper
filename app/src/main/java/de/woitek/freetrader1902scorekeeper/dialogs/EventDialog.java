@@ -48,7 +48,7 @@ public class EventDialog extends Dialog {
 				switch (rgEnemy.getSelectedIndex()) {
 					case 0:
 						event = new GameEventFight(gameData, GameEventFight.Enemy.HIGHWAYMAN, 1);
-						eventIntent = new Intent(getContext(), GameEventFight.class);
+						eventIntent = new Intent(getContext(), FightActivity.class);
 						break;
 					case 1:
 						event = new GameEventFight(gameData, GameEventFight.Enemy.HIGHWAYMAN, 2);
