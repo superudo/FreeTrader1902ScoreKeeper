@@ -7,68 +7,31 @@
               android:background="@color/background_color"
               android:gravity="center_horizontal"
               android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
               android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin">
-
-    <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
-        android:id="@+id/tCargoTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="EVENT"
-        android:textColor="@android:color/white"
-        android:textSize="40sp"
-        cust:fontFaceName="@string/western_font_name"/>
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin">
 
     <de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView
         android:id="@+id/lblAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="SELECT EVENT TYPE"
-        android:textSize="20dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Select event type"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
         cust:fontFaceName="@string/western_font_name"/>
 
     <de.woitek.libraries.styledradiogroup.StyledRadioGroup
         android:id="@+id/rgEnemy"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        cust:display="HIGHWAYMAN x1;HIGHWAYMAN x2;HIGHWAYMAN x3;BEAR;CONSTABLE"
+        cust:display="HIGHWAYMAN x1;HIGHWAYMAN x2;HIGHWAYMAN x3;BEAR;CONSTABLE;NO EVENT"
         cust:layout="vertical"
         cust:selected="false"
         />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/bnOk"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="110dp"
-            android:text="Do it!"/>
-
-        <Button
-            android:id="@+id/bnCancel"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:minWidth="110dp"
-            android:text="Forget it"/>
-
-    </LinearLayout>
 
 </LinearLayout>

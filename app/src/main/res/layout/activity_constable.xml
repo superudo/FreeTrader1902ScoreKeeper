@@ -98,30 +98,15 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llYouPay"
-                style="@style/NumberOutputText"
+            <view
+                android:id="@+id/lblYouHaveToPay"
+                style="@style/NumberOutputLine"
+                class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/line_space">
-
-                <view
-                    android:id="@+id/lblYouPay"
-                    class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You pay"
-                    android:textSize="24dp"/>
-
-                <view
-                    android:id="@+id/tYouPay"
-                    class="de.woitek.libraries.flexiblefonttextview.FlexibleFontTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="0"
-                    android:textSize="42dp"/>
-            </LinearLayout>
+                android:layout_marginTop="@dimen/line_space"
+                android:text="You have to pay"
+                android:textSize="30dp"/>
 
             <TextView
                 android:id="@+id/lblPoliceOutcome"
