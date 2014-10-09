@@ -3,7 +3,6 @@ package de.woitek.freetrader1902scorekeeper;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.woitek.freetrader1902scorekeeper.dialogs.GetawayDialog;
 import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.freetrader1902scorekeeper.types.GameEventFight;
 import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
@@ -64,29 +64,20 @@ public class FightActivity extends Activity implements RadioGroup.OnCheckedChang
         event.addObserver(this);
     }
 
-    private void gotoMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+	public void gotoMainActivity() {
+		Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(GameData.CLASSNAME, gameData);
         startActivity(intent);
         finish();
     }
 
     private void createButtonListeners() {
-        final Activity a = this;
-        fleeListener = new View.OnClickListener() {
+	    final FightActivity a = this;
+	    fleeListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Dialog explaining Crank, with good or bad result
-                new AlertDialog.Builder(a)
-                        .setMessage("Explain Crank (missfire uses $ 1, get players result and react.")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                            }
-                        });
-                gotoMainActivity();
-                // goto main screen
+	            new GetawayDialog(a, gameData).show();
             }
         };
 
