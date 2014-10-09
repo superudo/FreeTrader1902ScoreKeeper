@@ -65,22 +65,46 @@ public class BoxUIView extends LinearLayout {
 
 	private void DrawBoxes() {
 		final int LEN = mBoxViewId.length;
-		int level;
+        int[] level = new int[LEN];
 
-		for (int i = 0; i < LEN; i += 1) {
-			if ((i < this.mFilled) && this.mHasEmptyBoxes) {
-				level = 2;
-			} else if (i < this.mOwned) {
-				level = (mBrightBoxes) ? 2 : 1;
-			} else {
-				level = 0;
-			}
+        if (this.mHasEmptyBoxes) {
+            if (mFilled > mOwned) {
+                for (int i = 0; i < mOwned; i++) {
+                    level[i] = 2;
+                }
+                for (int i = mOwned; i < mFilled; i++) {
+                    level[i] = 3;
+                }
+                for (int i = mFilled; i < LEN; i++) {
+                    level[i] = 0;
+                }
+            } else {
+                for (int i = 0; i < mFilled; i++) {
+                    level[i] = 2;
+                }
+                for (int i = mFilled; i < mOwned; i++) {
+                    level[i] = 1;
+                }
+                for (int i = mOwned; i < LEN; i++) {
+                    level[i] = 0;
+                }
+            }
+        } else {
+            for (int i = 0; i < LEN; i += 1) {
+                if (i < this.mOwned) {
+                    level[i] = (mBrightBoxes) ? 2 : 1;
+                } else {
+                    level[i] = 0;
+                }
+            }
+        }
 
-			Drawable drw = ((ImageView) findViewById(mBoxViewId[i])).getDrawable();
-			drw.mutate();
-			drw.setLevel(level);
-			drw.setColorFilter(mBoxColor, PorterDuff.Mode.MULTIPLY);
-			drw.invalidateSelf();
+        for (int i = 0; i < LEN; i += 1) {
+            Drawable drw = ((ImageView) findViewById(mBoxViewId[i])).getDrawable();
+            drw.mutate();
+            drw.setLevel(level[i]);
+            drw.setColorFilter(mBoxColor, PorterDuff.Mode.MULTIPLY);
+            drw.invalidateSelf();
 		}
 	}
 

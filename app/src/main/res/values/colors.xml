@@ -2,7 +2,7 @@
 <resources>
     <color name="month_row_color">#ff40caff</color>
     <color name="cargo_red">#fff20000</color>
-    <color name="cargo_color">#ff000000</color>
+    <color name="cargo_color">#ff323232</color>
     <color name="background_color">#ffffa400</color>
     <color name="blue">#ff17308d</color>
     <color name="blue_transparent">#4417308d</color>

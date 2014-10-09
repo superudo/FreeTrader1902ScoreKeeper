@@ -100,18 +100,14 @@ public class MainActivity extends Activity
 		bMoonshine.setOwned(gameData.getCargo(GameData.MOONSHINE));
 
 		bCargo.setOwned(gameData.getEquipment(GameData.CARGO));
-
-		if (gameData.getEquipment(GameData.CARGO) < gameData.getCurrentCargoAmount()) {
-			bCargo.setFilled(gameData.getEquipment(GameData.CARGO));
-			setCargoColorAndCheckOverload();
-		} else {
-			bCargo.setFilled(gameData.getCurrentCargoAmount());
-		}
+        bCargo.setFilled(gameData.getCurrentCargoAmount());
 
 		bEngine.setOwned(gameData.getEquipment(GameData.ENGINE));
 		bShotguns.setOwned(gameData.getEquipment(GameData.SHOTGUNS));
 		bArmor.setOwned(gameData.getEquipment(GameData.ARMOR));
-	}
+
+        setCargoColorAndCheckOverload();
+    }
 
 	private void setCargoColorAndCheckOverload() {
 		int c = getResources().getColor(R.color.cargo_color);

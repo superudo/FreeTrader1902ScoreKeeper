@@ -24,6 +24,14 @@
             <solid android:color="#ffffffff"/>
         </shape>
     </item>
+    <item android:maxLevel="3">
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="@dimen/box_frame_size"
+                android:color="#ff000000" />
+            <solid android:color="#ffff0000" />
+        </shape>
+    </item>
 </level-list>
 
 
