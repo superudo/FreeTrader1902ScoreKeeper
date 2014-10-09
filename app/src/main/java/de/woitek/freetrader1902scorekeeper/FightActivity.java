@@ -62,6 +62,8 @@ public class FightActivity extends Activity implements RadioGroup.OnCheckedChang
         createButtonListeners();
 
         event.addObserver(this);
+
+	    ((StyledRadioGroup) findViewById(R.id.rgTask)).setSelectedIndex(0);
     }
 
 	public void gotoMainActivity() {

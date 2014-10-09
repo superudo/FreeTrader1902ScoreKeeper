@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import de.woitek.freetrader1902scorekeeper.views.BoxUIView;
 
 public class MainActivity extends Activity
 		implements PropertyChangeListener, View.OnClickListener {
+	public final String CLASSNAME = "MainActivity";
 
 	private GameData gameData;
 
@@ -47,6 +49,8 @@ public class MainActivity extends Activity
 		if (gameData == null) {
 			gameData = new GameData();
 		}
+
+		Log.d(CLASSNAME, String.format("onCreate Start: Produce = %d, Cargo = %d", gameData.getCargo(GameData.PRODUCE), gameData.getEquipment(GameData.CARGO)));
 
 		setContentView(R.layout.activity_main);
 
@@ -96,10 +100,31 @@ public class MainActivity extends Activity
 		bMoonshine.setOwned(gameData.getCargo(GameData.MOONSHINE));
 
 		bCargo.setOwned(gameData.getEquipment(GameData.CARGO));
-		bCargo.setFilled(gameData.getCurrentCargoAmount());
+
+		if (gameData.getEquipment(GameData.CARGO) < gameData.getCurrentCargoAmount()) {
+			bCargo.setFilled(gameData.getEquipment(GameData.CARGO));
+			setCargoColorAndCheckOverload();
+		} else {
+			bCargo.setFilled(gameData.getCurrentCargoAmount());
+		}
+
 		bEngine.setOwned(gameData.getEquipment(GameData.ENGINE));
 		bShotguns.setOwned(gameData.getEquipment(GameData.SHOTGUNS));
 		bArmor.setOwned(gameData.getEquipment(GameData.ARMOR));
+	}
+
+	private void setCargoColorAndCheckOverload() {
+		int c = getResources().getColor(R.color.cargo_color);
+		if (gameData.getCurrentCargoAmount() > gameData.getEquipment(GameData.CARGO)) {
+			c = getResources().getColor(R.color.cargo_red);
+			new AlertDialog.Builder(this)
+					.setTitle("Overload!")
+					.setMessage("You need to drop some cargo!")
+					.setPositiveButton("Ok", null)
+					.create()
+					.show();
+		}
+		((TextView) findViewById(R.id.lblCargo)).setTextColor(c);
 	}
 
 	@Override
@@ -172,17 +197,7 @@ public class MainActivity extends Activity
 			bMoonshine.setOwned(gameData.getCargo(GameData.MOONSHINE));
 		}
 
-		int c = getResources().getColor(R.color.cargo_color);
-		if (gameData.getCurrentCargoAmount() > gameData.getEquipment(GameData.CARGO)) {
-			c = getResources().getColor(R.color.cargo_red);
-			new AlertDialog.Builder(this)
-					.setTitle("Overload!")
-					.setMessage("You need to drop some cargo!")
-					.setPositiveButton("Ok", null)
-					.create()
-					.show();
-		}
-		((TextView) findViewById(R.id.lblCargo)).setTextColor(c);
+		setCargoColorAndCheckOverload();
 
 		if (propName.equals(GameData.WINNER)) {
 			LinearLayout row = (LinearLayout) findViewById(R.id.rowMonth);

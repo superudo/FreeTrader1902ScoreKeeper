@@ -15,7 +15,7 @@ import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
 public class EquipmentDialog extends Dialog {
 	private Activity activity;
 
-	private GameData data;
+	private GameData gameData;
 	private String toSell;
 
 	private StyledRadioGroup rgAction;
@@ -23,7 +23,7 @@ public class EquipmentDialog extends Dialog {
 	public EquipmentDialog(Activity a, GameData data, String sell) {
 		super(a);
 		this.activity = a;
-		this.data = data;
+		this.gameData = data;
 		toSell = sell;
 	}
 
@@ -59,27 +59,27 @@ public class EquipmentDialog extends Dialog {
 		boolean ok = false;
 		switch (rgAction.getSelectedIndex()) {
 			case 0: // Buy
-				ok = data.mayBuyEquipment(toSell);
+				ok = gameData.mayBuyEquipment(toSell);
 				if (ok) {
-					data.buyEquipment(toSell);
+					gameData.buyEquipment(toSell);
 					Toast.makeText(activity, "Bought.", Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(activity, "You cannot buy this.", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case 1: // Sell
-				ok = data.maySellEquipment(toSell);
+				ok = gameData.maySellEquipment(toSell);
 				if (ok) {
-					data.sellEquipment(toSell);
+					gameData.sellEquipment(toSell);
 					Toast.makeText(activity, "Sold.", Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(activity, "You cannot sell this much.", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case 2: // Drop
-				ok = data.maySellEquipment(toSell);
+				ok = gameData.maySellEquipment(toSell);
 				if (ok) {
-					data.dropEquipment(toSell);
+					gameData.dropEquipment(toSell);
 					Toast.makeText(activity, "Dropped.", Toast.LENGTH_SHORT).show();
 					dismiss();
 				} else {

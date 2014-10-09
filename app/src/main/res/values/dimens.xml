@@ -12,4 +12,10 @@
     <dimen name="box_ui_horizontal_spacing">2dp</dimen>
     <dimen name="button_padding">10dp</dimen>
     <dimen name="radio_button_horizontal_padding">20dp</dimen>
+
+    <dimen name="btn_padding_top">3dp</dimen>
+    <dimen name="btn_padding_bottom">3dp</dimen>
+    <dimen name="btn_padding_left">6dp</dimen>
+    <dimen name="btn_padding_right">6dp</dimen>
+    <dimen name="btn_corner_radius">6dp</dimen>
 </resources>

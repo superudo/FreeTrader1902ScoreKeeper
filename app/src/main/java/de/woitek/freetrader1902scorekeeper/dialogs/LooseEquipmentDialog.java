@@ -3,6 +3,7 @@ package de.woitek.freetrader1902scorekeeper.dialogs;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.RadioGroup;
@@ -14,6 +15,8 @@ import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
 
 public class LooseEquipmentDialog extends Dialog implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+	public final String CLASSNAME = "LooseEquipmentDialog";
+
 	private FightActivity activity;
 	private GameData gameData;
 
@@ -33,12 +36,10 @@ public class LooseEquipmentDialog extends Dialog implements RadioGroup.OnChecked
 
 	private void init() {
 		((TextView) findViewById(R.id.tRules)).setText(
-				"Too bad. You lost the fight. The attacker destroyed one part of your pretty " +
-						"truck, but you can choose which one... What do you think you will miss the least?"
-		);
+				"The attacker destroyed one part of your pretty " +
+						"truck, but you can choose which one...");
 
-		((StyledRadioGroup) findViewById(R.id.rgEquipment1)).setOnCheckedChangeListener(this);
-		((StyledRadioGroup) findViewById(R.id.rgEquipment2)).setOnCheckedChangeListener(this);
+		((StyledRadioGroup) findViewById(R.id.rgEquipment)).setOnCheckedChangeListener(this);
 
 		findViewById(R.id.bnOk).setOnClickListener(this);
 		findViewById(R.id.bnCancel).setOnClickListener(this);
@@ -48,30 +49,18 @@ public class LooseEquipmentDialog extends Dialog implements RadioGroup.OnChecked
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		switch (group.getId()) {
-			case R.id.rgEquipment1:
-				if (checkedId > -1) {
-					((StyledRadioGroup) findViewById(R.id.rgEquipment2)).setSelectedIndex(-1);
-				}
-				break;
-			case R.id.rgEquipment2:
-				if (checkedId > -1) {
-					((StyledRadioGroup) findViewById(R.id.rgEquipment1)).setSelectedIndex(-1);
-				}
-				break;
-		}
 		updateUI();
 	}
 
 	private void updateUI() {
 		String what = null;
-		String more = null;
+		String more = "\n";
 		String explain;
-		switch (getCombinedSelectedIndex()) {
+		switch (((StyledRadioGroup) findViewById(R.id.rgEquipment)).getSelectedIndex()) {
 			case 0: // Cargo
 				what = GameData.CARGO;
 				if (gameData.getEquipment(GameData.CARGO) - 1 < gameData.getCurrentCargoAmount()) {
-					more = "Unfortunately your cargo space will not carry all your goods anymore. So you have to drop some goods too.";
+					more = " You have to drop some goods too.";
 				}
 				break;
 			case 1:
@@ -87,40 +76,44 @@ public class LooseEquipmentDialog extends Dialog implements RadioGroup.OnChecked
 				break;
 		}
 		if (what != null) {
-			explain = String.format("The attacker destroyed one part of your <b>%s</b>.", what.toLowerCase());
+			if (gameData.getEquipment(what) == 1) {
+				explain = String.format("The last of your <b>%s%s</b> will be destroyed.%s",
+						what.toLowerCase(), what.equals(GameData.SHOTGUNS) ? "" : "s", more);
+			} else {
+				explain = String.format("One of your <b>%d %s%s</b> will be destroyed.%s",
+						gameData.getEquipment(what), what.toLowerCase(),
+						what.equals(GameData.SHOTGUNS) ? "" : "s", more
+				);
+			}
 		} else {
 			explain = "Please select, which truck part will be destroyed.";
 		}
 		((TextView) findViewById(R.id.tExplain)).setText(Html.fromHtml(explain));
-		TextView moreView = (TextView) findViewById(R.id.tMore);
-		if (more == null) {
-			moreView.setVisibility(View.GONE);
-		} else {
-			moreView.setVisibility(View.VISIBLE);
-			moreView.setText(more);
-		}
-	}
-
-	private int getCombinedSelectedIndex() {
-		int equ1 = ((StyledRadioGroup) findViewById(R.id.rgEquipment1)).getSelectedIndex();
-		int equ2 = ((StyledRadioGroup) findViewById(R.id.rgEquipment2)).getSelectedIndex();
-		int selectedIndex = -1;
-		if (equ1 > -1) {
-			selectedIndex = equ1;
-		} else if (equ2 > -1) {
-			selectedIndex = equ2 + 2;
-		}
-		return selectedIndex;
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.bnOk:
+				int part = ((StyledRadioGroup) findViewById(R.id.rgEquipment)).getSelectedIndex();
+				if (part > -1) {
+					dropPartAndGotoMainActivity(part);
+				}
+				dismiss();
 				break;
 			default:
 				dismiss();
 				break;
 		}
+	}
+
+	private void dropPartAndGotoMainActivity(int part) {
+		Log.d(CLASSNAME, String.format(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> dropPart Start: Produce = %d, Cargo = %d", gameData.getCargo(GameData.PRODUCE), gameData.getEquipment(GameData.CARGO)));
+		String[] parts = new String[]{GameData.CARGO, GameData.ENGINE, GameData.SHOTGUNS, GameData.ARMOR};
+		if ((part >= 0) && (part < parts.length)) {
+			gameData.dropEquipment(parts[part]);
+		}
+		activity.gotoMainActivity();
+		Log.d(CLASSNAME, String.format(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> dropPart Finish: Produce = %d, Cargo = %d", gameData.getCargo(GameData.PRODUCE), gameData.getEquipment(GameData.CARGO)));
 	}
 }

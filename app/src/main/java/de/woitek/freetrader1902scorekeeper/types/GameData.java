@@ -82,7 +82,8 @@ public class GameData implements Parcelable {
 			setEquipment(s, parcel.readInt());
 		}
 		for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
-			setCargo(s, parcel.readInt());
+			int v = parcel.readInt();
+			mCargo.get(s).setValue(v);
 		}
 	}
 
