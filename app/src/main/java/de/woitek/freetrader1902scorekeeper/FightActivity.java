@@ -2,7 +2,6 @@ package de.woitek.freetrader1902scorekeeper;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +16,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.woitek.freetrader1902scorekeeper.dialogs.GetawayDialog;
+import de.woitek.freetrader1902scorekeeper.dialogs.LooseEquipmentDialog;
 import de.woitek.freetrader1902scorekeeper.types.GameData;
 import de.woitek.freetrader1902scorekeeper.types.GameEventFight;
 import de.woitek.libraries.styledradiogroup.StyledRadioGroup;
@@ -98,8 +98,7 @@ public class FightActivity extends Activity implements RadioGroup.OnCheckedChang
         loosePartListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(a)
-                        .setMessage("You loose one part of your truck. (Show selection an let the player decide. Then change buttons to Fightback/Flee.)").show();
+	            new LooseEquipmentDialog(a, gameData).show();
             }
         };
     }
