@@ -22,7 +22,6 @@ import de.woitek.freetrader1902scorekeeper.views.BoxUIView;
 
 public class MainActivity extends Activity
 		implements PropertyChangeListener, View.OnClickListener {
-	public final String CLASSNAME = "MainActivity";
 
 	private GameData gameData;
 
@@ -108,16 +107,24 @@ public class MainActivity extends Activity
 
 	private void setCargoColorAndCheckOverload() {
 		int c = getResources().getColor(R.color.cargo_color);
-		if (gameData.getCurrentCargoAmount() > gameData.getEquipment(GameData.CARGO)) {
+		if (gameData.isOverload()) {
 			c = getResources().getColor(R.color.cargo_red);
-			new AlertDialog.Builder(this)
-					.setTitle("Overload!")
-					.setMessage("You need to drop some cargo!")
-					.setPositiveButton("Ok", null)
-					.create()
-					.show();
+			warnAboutOverload();
 		}
 		((TextView) findViewById(R.id.lblCargo)).setTextColor(c);
+	}
+
+	private boolean warnAboutOverload() {
+		if (!gameData.isOverload()) {
+			return false;
+		}
+		new AlertDialog.Builder(this)
+				.setTitle("Overload!")
+				.setMessage("You need to drop some cargo!")
+				.setPositiveButton("Ok", null)
+				.create()
+				.show();
+		return true;
 	}
 
 	@Override
@@ -227,26 +234,40 @@ public class MainActivity extends Activity
 					new CargoDialog(this, gameData, GameData.MOONSHINE).show();
 					break;
 				case R.id.rowCargo:
-					new EquipmentDialog(this, gameData, GameData.CARGO).show();
+					if (!warnAboutOverload()) {
+						new EquipmentDialog(this, gameData, GameData.CARGO).show();
+					}
 					break;
 				case R.id.rowEngine:
-					new EquipmentDialog(this, gameData, GameData.ENGINE).show();
+					if (!warnAboutOverload()) {
+						new EquipmentDialog(this, gameData, GameData.ENGINE).show();
+					}
 					break;
 				case R.id.rowShotguns:
-					new EquipmentDialog(this, gameData, GameData.SHOTGUNS).show();
+					if (!warnAboutOverload()) {
+						new EquipmentDialog(this, gameData, GameData.SHOTGUNS).show();
+					}
 					break;
 				case R.id.rowArmor:
-					new EquipmentDialog(this, gameData, GameData.ARMOR).show();
+					if (!warnAboutOverload()) {
+						new EquipmentDialog(this, gameData, GameData.ARMOR).show();
+					}
 					break;
 				case R.id.rowMonth:
-					FinishCurrentMonth();
+					if (!warnAboutOverload()) {
+						FinishCurrentMonth();
+					}
 					break;
 				case R.id.tMove:
-					MoveToNextCity();
+					if (!warnAboutOverload()) {
+						MoveToNextCity();
+					}
 					break;
 				case R.id.tEvent:
-					EventDialog dlg = new EventDialog(this, gameData);
-					dlg.show();
+					if (!warnAboutOverload()) {
+						EventDialog dlg = new EventDialog(this, gameData);
+						dlg.show();
+					}
 					break;
 				default:
 					break;

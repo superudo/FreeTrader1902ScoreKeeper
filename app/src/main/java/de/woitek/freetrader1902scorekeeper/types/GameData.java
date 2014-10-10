@@ -360,4 +360,8 @@ public class GameData implements Parcelable {
 	public void dropAllCargo(String whichCargo) {
 		mCargo.get(whichCargo).setValue(0);
 	}
+
+	public boolean isOverload() {
+		return (getEquipment(CARGO) < getCurrentCargoAmount());
+	}
 }

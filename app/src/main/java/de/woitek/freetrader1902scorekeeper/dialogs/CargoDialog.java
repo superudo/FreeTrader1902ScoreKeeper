@@ -44,6 +44,13 @@ public class CargoDialog extends Dialog {
 		rgAmount = (StyledRadioGroup) findViewById(R.id.rbAmount);
 		rgPrice = (StyledRadioGroup) findViewById(R.id.rbPrice);
 
+		if (data.isOverload()) { // nur Drop möglich
+			rgAction.enableIndex(0, false);
+			rgAction.enableIndex(1, false);
+			rgAction.enableIndex(2, true);
+			rgAction.setSelectedIndex(2);
+		}
+
 		rgAction.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
