@@ -1,5 +1,6 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -325,6 +326,30 @@ public class GameData implements Parcelable {
         return mEquipment.get(CARGO).getValue() - getCurrentCargoAmount();
     }
 
+    public void clearCurrentEvent() {
+        currentEvent = noEvent;
+    }
+
+    public GameEvent getCurrentEvent() {
+        return currentEvent;
+    }
+
+    public void setCurrentEvent(GameEvent event) {
+        currentEvent = (event != null) ? event : noEvent;
+    }
+
+    public void dropAllCargo(String whichCargo) {
+        mCargo.get(whichCargo).setValue(0);
+    }
+
+    public boolean isOverload() {
+        return (getEquipment(CARGO) < getCurrentCargoAmount());
+    }
+
+    public void setArrested() {
+        setGameState(-2);
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -353,30 +378,60 @@ public class GameData implements Parcelable {
             parcel.writeInt(getCargo(s));
         }
 
-	    parcel.writeInt(gameState);
+        parcel.writeInt(gameState);
     }
 
-    public void clearCurrentEvent() {
-        currentEvent = noEvent;
+    public void saveOnPause(SharedPreferences prefs) {
+        SharedPreferences.Editor editor = prefs.edit();
+
+        if (gameState == 0) {
+            editor.putString("EventType", currentEvent.getEventType().toString());
+            currentEvent.saveOnPause(editor);
+            editor.putInt("Month", getMonth());
+            editor.putInt("Money", getMoney());
+            for (String s : new String[]{CARGO, ENGINE, SHOTGUNS, ARMOR}) {
+                editor.putInt(s, getEquipment(s));
+            }
+            for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+                editor.putInt(s, getCargo(s));
+            }
+            editor.putInt("State", gameState);
+        } else {
+            editor.clear();
+        }
+
+        editor.commit();
     }
 
-    public GameEvent getCurrentEvent() {
-        return currentEvent;
+    public void loadOnResume(SharedPreferences prefs) {
+        init();
+
+        String eventName = prefs.getString("EventType", EventType.NONE.toString());
+        switch (EventType.valueOf(eventName)) {
+            case FIGHT:
+                currentEvent = new GameEventFight(prefs);
+                break;
+            case CARGOCHECK:
+                currentEvent = new GameEventPolice(prefs);
+                break;
+            case NONE:
+                currentEvent = noEvent;
+                break;
+        }
+        currentEvent.setGameData(this);
+
+        month.setValue(prefs.getInt("Month", 1));
+        money.setValue(prefs.getInt("Money", 5));
+
+        setEquipment(CARGO, prefs.getInt(CARGO, 3));
+        setEquipment(ENGINE, prefs.getInt(ENGINE, 3));
+        setEquipment(SHOTGUNS, prefs.getInt(SHOTGUNS, 2));
+        setEquipment(ARMOR, prefs.getInt(ARMOR, 2));
+
+        for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
+            mCargo.get(s).setValue(prefs.getInt(s, 0));
+        }
+
+        gameState = prefs.getInt("State", 0);
     }
-
-    public void setCurrentEvent(GameEvent event) {
-        currentEvent = (event != null) ? event : noEvent;
-    }
-
-	public void dropAllCargo(String whichCargo) {
-		mCargo.get(whichCargo).setValue(0);
-	}
-
-	public boolean isOverload() {
-		return (getEquipment(CARGO) < getCurrentCargoAmount());
-	}
-
-	public void setArrested() {
-		setGameState(-2);
-	}
 }

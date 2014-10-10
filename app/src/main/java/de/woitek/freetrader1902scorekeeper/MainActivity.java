@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,9 +40,35 @@ public class MainActivity extends Activity
 
 	private BoxUIView bMonth;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("de.woitek.freetrader1902scorekeeper.MainActivity", "onResume");
+        gameData = new GameData();
+        gameData.loadOnResume(getPreferences(MODE_PRIVATE));
+
+        if (getIntent().hasExtra(GameData.CLASSNAME)) {
+            gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
+        }
+
+        if (gameData == null) {
+            gameData = new GameData();
+        }
+
+        gameData.addChangeListener(this);
+        updateViewByGameData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("de.woitek.freetrader1902scorekeeper.MainActivity", "onPause");
+        gameData.saveOnPause(getPreferences(MODE_PRIVATE));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
 		gameData = getIntent().getParcelableExtra(GameData.CLASSNAME);
 		if (gameData == null) {

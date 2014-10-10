@@ -1,5 +1,6 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -27,6 +28,11 @@ public class GameEventPolice extends GameEvent implements Parcelable {
         mLawLevel = parcel.readInt();
     }
 
+    public GameEventPolice(SharedPreferences prefs) {
+        mFine = prefs.getInt("EventPoliceFine", 0);
+        mLawLevel = prefs.getInt("EventPoliceLaw", 0);
+    }
+
     public void setLawLevel(int lawLevel) {
         mLawLevel = lawLevel;
     }
@@ -49,6 +55,12 @@ public class GameEventPolice extends GameEvent implements Parcelable {
     }
 
     @Override
+    public void saveOnPause(SharedPreferences.Editor editor) {
+        editor.putInt("EventPoliceFine", mFine);
+        editor.putInt("EventPoliceLaw", mLawLevel);
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -57,6 +69,5 @@ public class GameEventPolice extends GameEvent implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(mFine);
         parcel.writeInt(mLawLevel);
-
     }
 }

@@ -1,5 +1,7 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
+import android.content.SharedPreferences;
+
 import java.util.Observable;
 
 public abstract class GameEvent extends Observable {
@@ -12,6 +14,8 @@ public abstract class GameEvent extends Observable {
     public EventType getEventType() {
         return EventType.NONE;
     }
+
+    public abstract void saveOnPause(SharedPreferences.Editor editor);
 
     public enum EventType {
         FIGHT,

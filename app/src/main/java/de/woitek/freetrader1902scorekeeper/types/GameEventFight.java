@@ -1,5 +1,6 @@
 package de.woitek.freetrader1902scorekeeper.types;
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +16,7 @@ public class GameEventFight extends GameEvent implements Parcelable {
             return new GameEventFight[i];
         }
     };
+
     private Enemy mEnemy = Enemy.NOBODY;
     private Fight mFight = Fight.NOFIGHT;
     private int mEnemyMight = 0;
@@ -37,6 +39,14 @@ public class GameEventFight extends GameEvent implements Parcelable {
         mEnemyMight = parcel.readInt();
         mPlayerModifier = parcel.readInt();
         mEnemyModifier = parcel.readInt();
+    }
+
+    public GameEventFight(SharedPreferences prefs) {
+        mFight = Fight.valueOf(prefs.getString("EventFightFight", Fight.NOFIGHT.toString()));
+        mEnemy = Enemy.valueOf(prefs.getString("EventFightEnemy", Enemy.NOBODY.toString()));
+        mEnemyMight = prefs.getInt("EventFightEnemyMight", 0);
+        mPlayerModifier = prefs.getInt("EventFightPlayerMod", 0);
+        mEnemyModifier = prefs.getInt("EventFightEnemyMod", 0);
     }
 
     protected void notifyIfFightStateChanged(Command cmd) {
@@ -176,6 +186,15 @@ public class GameEventFight extends GameEvent implements Parcelable {
     @Override
     public EventType getEventType() {
         return EventType.FIGHT;
+    }
+
+    @Override
+    public void saveOnPause(SharedPreferences.Editor editor) {
+        editor.putString("EventFightFight", mFight.toString());
+        editor.putString("EventFightEnemy", mEnemy.toString());
+        editor.putInt("EventFightEnemyMight", mEnemyMight);
+        editor.putInt("EventFightPlayerMod", mPlayerModifier);
+        editor.putInt("EventFightEnemyMod", mEnemyModifier);
     }
 
     @Override
