@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,8 +48,6 @@ public class MainActivity extends Activity
 		if (gameData == null) {
 			gameData = new GameData();
 		}
-
-		Log.d(CLASSNAME, String.format("onCreate Start: Produce = %d, Cargo = %d", gameData.getCargo(GameData.PRODUCE), gameData.getEquipment(GameData.CARGO)));
 
 		setContentView(R.layout.activity_main);
 
@@ -100,14 +97,14 @@ public class MainActivity extends Activity
 		bMoonshine.setOwned(gameData.getCargo(GameData.MOONSHINE));
 
 		bCargo.setOwned(gameData.getEquipment(GameData.CARGO));
-        bCargo.setFilled(gameData.getCurrentCargoAmount());
+		bCargo.setFilled(gameData.getCurrentCargoAmount());
 
 		bEngine.setOwned(gameData.getEquipment(GameData.ENGINE));
 		bShotguns.setOwned(gameData.getEquipment(GameData.SHOTGUNS));
 		bArmor.setOwned(gameData.getEquipment(GameData.ARMOR));
 
-        setCargoColorAndCheckOverload();
-    }
+		setCargoColorAndCheckOverload();
+	}
 
 	private void setCargoColorAndCheckOverload() {
 		int c = getResources().getColor(R.color.cargo_color);

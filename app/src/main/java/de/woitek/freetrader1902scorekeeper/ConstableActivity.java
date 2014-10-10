@@ -69,9 +69,9 @@ public class ConstableActivity extends Activity implements View.OnClickListener 
 		    public void onClick(View v) {
 			    v.setEnabled(false);
 			    gameData.setMoney(gameData.getMoney() - event.whatToPay());
-			    gameData.dropCargo(gameData.getCargo(GameData.MOONSHINE), GameData.MOONSHINE);
-                gotoMainActivity();
-            }
+			    gameData.dropAllCargo(GameData.MOONSHINE);
+			    gotoMainActivity();
+		    }
 	    });
 
         findViewById(R.id.bnSell).setOnClickListener(this);

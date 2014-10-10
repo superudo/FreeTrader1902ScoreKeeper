@@ -356,4 +356,8 @@ public class GameData implements Parcelable {
     public void setCurrentEvent(GameEvent event) {
         currentEvent = (event != null) ? event : noEvent;
     }
+
+	public void dropAllCargo(String whichCargo) {
+		mCargo.get(whichCargo).setValue(0);
+	}
 }
