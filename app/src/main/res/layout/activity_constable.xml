@@ -120,7 +120,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <Button
                     android:id="@+id/bnPay"
@@ -128,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:minWidth="150dp"
+                    android:minWidth="140dp"
                     android:text="Pay fine" />
 
                 <Button
@@ -137,10 +138,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:minWidth="150dp"
+                    android:minWidth="140dp"
                     android:text="Sell equipment" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/bnBroke"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:minWidth="140dp"
+                android:text="I can't pay."/>
 
             <Button
                 android:id="@+id/bnProceed"

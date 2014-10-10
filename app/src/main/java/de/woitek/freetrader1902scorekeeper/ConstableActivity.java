@@ -1,6 +1,8 @@
 package de.woitek.freetrader1902scorekeeper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -74,10 +76,39 @@ public class ConstableActivity extends Activity implements View.OnClickListener 
 		    }
 	    });
 
+	    final Activity activity = this;
+	    findViewById(R.id.bnBroke).setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    new AlertDialog.Builder(activity).setTitle("Really broke?")
+					    .setMessage("Do you really can't sell any truck parts? Remember: If you don't pay you're arrested and the game is over!")
+					    .setNegativeButton("Yes. I'm done.", new DialogInterface.OnClickListener() {
+						    @Override
+						    public void onClick(DialogInterface dialog, int which) {
+							    looseByArrest();
+						    }
+					    })
+					    .setPositiveButton("Stop. I can pay.", new DialogInterface.OnClickListener() {
+						    @Override
+						    public void onClick(DialogInterface dialog, int which) {
+							    dialog.cancel();
+						    }
+					    }).show();
+		    }
+	    });
+
         findViewById(R.id.bnSell).setOnClickListener(this);
 
         updateUI();
     }
+
+	private void looseByArrest() {
+		gameData.setArrested();
+		Intent intent = new Intent(this, GameEndActivity.class);
+		intent.putExtra(GameData.CLASSNAME, gameData);
+		startActivity(intent);
+		finish();
+	}
 
 	private void gotoMainActivity() {
 		Intent intent = new Intent(this, MainActivity.class);
@@ -99,7 +130,7 @@ public class ConstableActivity extends Activity implements View.OnClickListener 
             outcome = "You may go now. But I'll keep an eye on you, pal...";
 	        for (int i : new int[]{R.id.lblConstableFine, R.id.lblLawLevel,
 			        R.id.lblPoliceRule, R.id.rgLawLevel, R.id.rgConstableFine,
-			        R.id.lblYouHaveToPay, R.id.llPayButtons}) {
+			        R.id.lblYouHaveToPay, R.id.llPayButtons, R.id.bnBroke}) {
 		        findViewById(i).setVisibility(View.GONE);
             }
         }

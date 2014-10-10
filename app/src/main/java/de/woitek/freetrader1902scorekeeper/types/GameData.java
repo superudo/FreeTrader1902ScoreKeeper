@@ -85,6 +85,8 @@ public class GameData implements Parcelable {
             int v = parcel.readInt();
             mCargo.get(s).setValue(v);
         }
+
+	    gameState = parcel.readInt();
     }
 
     private void init() {
@@ -125,6 +127,8 @@ public class GameData implements Parcelable {
         money = new RangedInteger(0, 20, 5);
 
         monthlyRate = new int[]{0, 5, 10, 10, 15};
+
+	    currentEvent = noEvent;
 
         gameState = 0;
     }
@@ -282,6 +286,10 @@ public class GameData implements Parcelable {
         return (gameState == -1);
     }
 
+	public boolean isInJail() {
+		return (gameState == -2);
+	}
+
     protected void setGameState(int value) {
         if (gameState != value) {
             gameState = value;
@@ -292,7 +300,8 @@ public class GameData implements Parcelable {
     public void finishMonth() {
         if (getMoney() < monthlyRate[getMonth()]) {
             // loser
-            setGameState(-1);
+	        setMoney(0);
+	        setGameState(-1);
         } else {
             setMoney(getMoney() - monthlyRate[getMonth()]);
             if (getMonth() < month.getMax() - 1) {
@@ -343,6 +352,8 @@ public class GameData implements Parcelable {
         for (String s : new String[]{PRODUCE, MUNITIONS, TEXTILES, MOONSHINE}) {
             parcel.writeInt(getCargo(s));
         }
+
+	    parcel.writeInt(gameState);
     }
 
     public void clearCurrentEvent() {
@@ -363,5 +374,9 @@ public class GameData implements Parcelable {
 
 	public boolean isOverload() {
 		return (getEquipment(CARGO) < getCurrentCargoAmount());
+	}
+
+	public void setArrested() {
+		setGameState(-2);
 	}
 }

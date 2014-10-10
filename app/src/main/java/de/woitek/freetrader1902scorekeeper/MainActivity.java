@@ -3,7 +3,7 @@ package de.woitek.freetrader1902scorekeeper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -139,11 +139,15 @@ public class MainActivity extends Activity
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_restart) {
-			RestartGame();
-			return true;
+		switch (item.getItemId()) {
+			case R.id.action_restart:
+				RestartGame();
+				return true;
+			case R.id.action_quit: // http://stackoverflow.com/questions/20853087/finish-activity-when-back-button-twice-pressed
+				finish();
+				return true;
 		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -201,14 +205,11 @@ public class MainActivity extends Activity
 
 		if (propName.equals(GameData.WINNER)) {
 			LinearLayout row = (LinearLayout) findViewById(R.id.rowMonth);
-			if (gameData.wonGame()) { // WINNER!
-				row.setBackgroundColor(Color.GREEN);
-				((TextView) findViewById(R.id.lblMonth)).setText("YOU WON!");
-				bMonth.setVisibility(View.INVISIBLE);
-			} else if (gameData.lostGame()) { // LOOSER!
-				row.setBackgroundColor(Color.RED);
-				((TextView) findViewById(R.id.lblMonth)).setText("YOU ARE BROKE!");
-				bMonth.setVisibility(View.INVISIBLE);
+			if (gameData.wonGame() || gameData.lostGame()) { // WINNER!
+				Intent intent = new Intent(this, GameEndActivity.class);
+				intent.putExtra(GameData.CLASSNAME, gameData);
+				startActivity(intent);
+				finish();
 			} else { // Game start
 				row.setBackgroundColor(getResources().getColor(R.color.month_row_color));
 				((TextView) findViewById(R.id.lblMonth)).setText(GameData.MONTH);
